@@ -21,10 +21,14 @@ function App() {
       </header>
     ) : (
       <header className="App-header loggedIn">
-        <NavButton name="Home" />
-        <NavButton name="Profile" />
-        <NavButton name="Discover" />
-        <NavButton onClick={() => setIsLoggedIn(false)} name="Log Out" />
+        <NavButton path="/home" name="Home" />
+        <NavButton path="/profile" name="Profile" />
+        <NavButton path="/discover" name="Discover" />
+        <NavButton
+          path="/"
+          onClick={() => setIsLoggedIn(false)}
+          name="Log Out"
+        />
       </header>
     );
 
@@ -32,7 +36,39 @@ function App() {
     headerUserType
   ) : (
     <header className="App-header loggedOut">
-      <NavButton onClick={() => setIsLoggedIn(true)} name="Sign Up" />
+      {/* FIX REPEATED CODE FOR TWO PATHS */}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <NavButton
+              path="/signup"
+              // onClick={() => setIsLoggedIn(true)}
+              name="Sign Up"
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <NavButton
+              path="/signup"
+              // onClick={() => setIsLoggedIn(true)}
+              name="Sign Up"
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <NavButton
+              path="/login"
+              // onClick={() => setIsLoggedIn(true)}
+              name="Log In"
+            />
+          }
+        />
+      </Routes>
     </header>
   );
 
