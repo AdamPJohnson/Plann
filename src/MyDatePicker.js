@@ -16,6 +16,14 @@ function MyDatePicker() {
       date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
       eventName: "JellyRoll Party",
     },
+    {
+      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
+      eventName: "JellyRoll Party",
+    },
+    {
+      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
+      eventName: "JellyRoll Party",
+    },
   ]);
   const handleDateChange = (input) => {
     console.log(input);

@@ -3,12 +3,6 @@
   height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -53,12 +47,13 @@
 @media screen and (max-width: 600px) {
   #loginForm {
     width: 80vw;
-    height: 80vw;
+    height: 90vw;
   }
 }
 #loginForm {
   border-radius: 10px;
-  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px rgba(156, 136, 196, 0.4),
+    -1px -1px 5px rgba(192, 235, 255, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,12 +83,19 @@ input {
   justify-content: space-around;
 }
 
+#datePicker {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 #currentDatesContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 30%;
+  height: 50%;
 }
 #currentDatesList {
   display: flex;
@@ -101,7 +103,11 @@ input {
   align-items: center;
   justify-content: center;
   height: 60%;
+  width: 80%;
   overflow: scroll;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .dateListItem {
@@ -109,4 +115,21 @@ input {
   border-radius: 5px;
   padding: 0.2em;
   width: 80%;
+  height: 15vh;
+  font-size: 0.8em;
+  margin: 0.2em;
+}
+
+.eventName {
+  font-weight: bold;
+}
+
+input {
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  border-width: 0px;
+  border-radius: 3px;
+}
+
+label {
+  font-size: 0.8em;
 }

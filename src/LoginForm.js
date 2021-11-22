@@ -29,6 +29,7 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg }) {
     <form id="loginForm">
       <h2>Log In...</h2>
       <ToggleButtonGroup
+        size="small"
         color="primary"
         value={isOrg}
         exclusive
