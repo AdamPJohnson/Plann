@@ -8,5 +8,10 @@ module.exports = {
     );
   },
 
-  loginOrg: () => {},
+  loginOrg: async (input) => {
+    const { username, password } = input;
+    return await pool.query(
+      `SELECT * from orgs WHERE username='${username.toLowerCase()}' AND password='${password}'`
+    );
+  },
 };

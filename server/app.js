@@ -25,21 +25,17 @@ app.post("/loginUser", (req, res) => {
       res.status(500).send();
     }
   });
-  // if (users[username] && users[username] === password) {
-  //   res.status(200).send();
-  // } else {
-  //   res.status(404).send();
-  // }
 });
 
 app.post("/loginOrg", (req, res) => {
   const { username, password } = req.body;
-
-  if (users[username] && users[username] === password) {
-    res.status(200).send();
-  } else {
-    res.status(404).send();
-  }
+  login.loginOrg({ username, password }).then((data) => {
+    if (data.rows[0]) {
+      res.status(200).send(data.rows[0]);
+    } else {
+      res.status(500).send();
+    }
+  });
 });
 
 app.post("/signupUser", (req, res) => {
