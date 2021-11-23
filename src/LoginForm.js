@@ -10,8 +10,9 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg }) {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    const userOrg = isOrg ? "Org" : "User";
     axios
-      .post("http://localhost:8080/login", { ...formData })
+      .post(`http://localhost:8080/login${userOrg}`, { ...formData })
       .then((data) => {
         setIsLoggedIn(true);
         console.log({ data });

@@ -4,7 +4,7 @@ import "react-dates/lib/css/_datepicker.css";
 // import { SingleDatePicker } from "react-dates";
 import DatePicker from "react-datepicker";
 import AddDateButton from "./AddDateButton";
-import DateListItem from "./DateListItem";
+import EventListItem from "./EventListItem";
 import "react-datepicker/dist/react-datepicker.css";
 
 function MyDatePicker() {
@@ -31,7 +31,7 @@ function MyDatePicker() {
   };
 
   const datesList = currentDates.map((date) => {
-    return <DateListItem date={date} />;
+    return <EventListItem event={date} />;
   });
   return (
     <div id="datePickerPage">
