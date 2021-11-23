@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import useForm from "./useForm";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import axios from "axios";
-function LoginForm({ setIsLoggedIn, isOrg, setIsOrg }) {
+function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const [formData, onChange] = useForm({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -16,6 +17,8 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg }) {
       .then((data) => {
         setIsLoggedIn(true);
         console.log({ data });
+        setUser(data.data);
+        navigate(`${userOrg}/home`);
       })
       .catch((error) => {
         setErrorMessage("Invalid Username or Password");

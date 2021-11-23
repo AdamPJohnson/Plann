@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useForm from "./useForm";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material/";
 
 function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg }) {
@@ -11,6 +11,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg }) {
     password: "",
     orgName: "",
   });
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg }) {
       .then((data) => {
         setIsLoggedIn(true);
         console.log({ data });
+        navigate(`${userOrg}/home`);
       })
       .catch((error) => {
         setErrorMessage("Username Already Taken");

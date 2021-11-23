@@ -6,12 +6,13 @@ import LoginForm from "./LoginForm.js";
 import SignUpForm from "./SignUpForm.js";
 import Header from "./Header.js";
 import UserHome from "./UserHome.js";
+import OrgHome from "./OrgHome.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
-  const [user, setUser] = useState({ name: "Adam" });
+  const [user, setUser] = useState(null);
 
   const main = isLoggedIn ? (
     <>
@@ -19,7 +20,8 @@ function App() {
         <Route path="/user/home" element={<UserHome user={user} />} />
       </Route>
       <Route path="/org">
-        <Route path="/org/addDates" element={<MyDatePicker />} />
+        <Route path="/org/home" element={<OrgHome user={user} />} />
+        <Route path="/org/addDates" element={<MyDatePicker user={user} />} />
       </Route>
     </>
   ) : (
@@ -31,6 +33,7 @@ function App() {
             isOrg={isOrg}
             setIsOrg={setIsOrg}
             setIsLoggedIn={setIsLoggedIn}
+            setUser={setUser}
           />
         }
       />
@@ -51,6 +54,7 @@ function App() {
             isOrg={isOrg}
             setIsOrg={setIsOrg}
             setIsLoggedIn={setIsLoggedIn}
+            setUser={setUser}
           />
         }
       />

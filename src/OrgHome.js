@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EventListItem from "./EventListItem";
-function UserHome({ user }) {
+function OrgHome({ user }) {
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([
     {
       date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
@@ -28,4 +28,4 @@ function UserHome({ user }) {
   );
 }
 
-export default UserHome;
+export default OrgHome;
