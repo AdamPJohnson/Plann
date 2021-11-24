@@ -5,24 +5,26 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material/";
 
-function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg }) {
+function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const [formData, onChange] = useForm({
     username: "",
     password: "",
     orgName: "",
+    email: "",
+    zip: "",
   });
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    const userOrg = isOrg ? "Org" : "User";
+
+    const userOrg = isOrg ? "org" : "user";
     axios
       .post(`http://localhost:8080/signup${userOrg}`, { ...formData })
       .then((data) => {
         setIsLoggedIn(true);
-        console.log({ data });
-        navigate(`${userOrg}/home`);
+        setUser(data.data);
+        navigate(`../${userOrg}/home`);
       })
       .catch((error) => {
         setErrorMessage("Username Already Taken");
@@ -54,6 +56,10 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg }) {
           <input onChange={onChange} type="text" name="orgName" />
         </>
       )}
+      <label htmlFor="email">Email</label>
+      <input onChange={onChange} type="text" name="email" />
+      <label htmlFor="zip">Zip Code</label>
+      <input onChange={onChange} type="text" name="zip" />
       <label htmlFor="username">Username</label>
       <input onChange={onChange} type="text" name="username" />
       <label htmlFor="password">Password</label>

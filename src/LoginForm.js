@@ -26,7 +26,6 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
       });
   };
   const handleToggle = () => {
-    console.log(isOrg);
     setIsOrg((prev) => !prev);
   };
   return (

@@ -44,6 +44,7 @@ function App() {
             isOrg={isOrg}
             setIsOrg={setIsOrg}
             setIsLoggedIn={setIsLoggedIn}
+            setUser={setUser}
           />
         }
       />

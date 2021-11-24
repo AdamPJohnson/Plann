@@ -1,7 +1,7 @@
 /* psql -U postgres < server/db/schema.sql  THIS ONE!!!*/
 DROP DATABASE IF EXISTS datepicker;
 CREATE DATABASE datepicker;
-\ c datepicker;
+\c datepicker;
 DROP TABLE IF EXISTS dates;
 DROP TABLE IF EXISTS follows;
 DROP TABLE IF EXISTS users;

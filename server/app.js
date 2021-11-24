@@ -28,8 +28,8 @@ app.post("/loginUser", (req, res) => {
 });
 
 app.post("/loginOrg", (req, res) => {
-  const { username, password } = req.body;
-  login.loginOrg({ username, password }).then((data) => {
+  const { username, password, zip } = req.body;
+  login.loginOrg({ username, password, zip }).then((data) => {
     if (data.rows[0]) {
       res.status(200).send(data.rows[0]);
     } else {
@@ -39,13 +39,22 @@ app.post("/loginOrg", (req, res) => {
 });
 
 app.post("/signupUser", (req, res) => {
-  const { username, password } = req.body;
-  if (users[username]) {
-    res.status(409).send();
-  } else {
-    users[username] = password;
-    res.status(201).send();
-  }
+  const { username, password, email, zip } = req.body;
+
+  signup
+    .signupUser({ username, password, email, zip })
+    .then((data) => {
+      console.log(data);
+      if (data.rows[0]) {
+        res.status(201).send(data.rows[0]);
+      } else {
+        res.status(500).send();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
 });
 app.post("/signupOrg", (req, res) => {
   const { username, password } = req.body;
