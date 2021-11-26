@@ -7,6 +7,7 @@ module.exports = {
     return await pool.query(
       `INSERT INTO users (username, password, email, zip) values ('${username}','${password}','${email}','${zip}') RETURNING *;`
     );
+    ////// THIS NEEDS TO BE FINISHED
   },
 
   signupOrg: async (input) => {

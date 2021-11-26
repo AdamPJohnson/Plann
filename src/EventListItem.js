@@ -3,9 +3,9 @@ import React from "react";
 function EventListItem({ event }) {
   return (
     <div className="eventListItem">
-      <span className="eventName">{event.eventName}</span>
+      <span className="eventName">{event.name}</span>
       <br />
-      <span className="eventDate">{event.date}</span>
+      <span className="eventDate">{new Date(event.date).toString()}</span>
     </div>
   );
 }

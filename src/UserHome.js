@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import EventListItem from "./EventListItem";
 function UserHome({ user }) {
-  const [userUpcomingEvents, setUserUpcomingEvents] = useState([
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-  ]);
-  const eventList = userUpcomingEvents.map((date) => {
-    return <EventListItem event={date} />;
-  });
-  console.log(user);
+  const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
+  const getUserUpcomingEvents = (id) => {
+    axios
+      .get(`http://localhost:8080/events/${id}`)
+      .then((data) => {
+        console.log("fetched events: ", data);
+        setUserUpcomingEvents(data.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    getUserUpcomingEvents(user.id);
+  }, [user]);
+  const eventList = userUpcomingEvents.length
+    ? userUpcomingEvents.map((event) => {
+        return <EventListItem event={event} />;
+      })
+    : 'You have no upcoming events. Click "Discover" to add some!';
+
   return (
     <div id="userHome">
       <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>

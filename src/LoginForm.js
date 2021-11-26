@@ -18,7 +18,7 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         setIsLoggedIn(true);
         console.log({ data });
         setUser(data.data);
-        navigate(`${userOrg}/home`);
+        navigate(`../${userOrg}/home`);
       })
       .catch((error) => {
         setErrorMessage("Invalid Username or Password");

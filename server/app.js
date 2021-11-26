@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const { signup, login } = require("./models");
+const { signup, login, event } = require("./models");
 
 const users = {
   adam: "password",
@@ -66,4 +66,16 @@ app.post("/signupOrg", (req, res) => {
   }
 });
 
+app.get("/events/:userId", (req, res) => {
+  const { userId } = req.params;
+  event
+    .getAll(userId)
+    .then((data) => {
+      res.status(200).send(data.rows[0].json_agg);
+    })
+    .catch((e) => {
+      console.log("failed to fetch user events: ", e);
+      res.status(404).send([]);
+    });
+});
 module.exports = app;
