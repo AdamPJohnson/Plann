@@ -120,11 +120,15 @@ input {
 .eventListItem {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 0.2em;
+  padding: 0.7em;
   width: 80%;
-  height: 15vh;
+  max-height: 15vh;
   font-size: 0.8em;
   margin: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .eventName {
@@ -145,6 +149,9 @@ label {
   /* border: 1px solid black; */
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #welcome {
@@ -154,7 +161,7 @@ label {
 #userUpcomingEventsContainer {
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
-  width: 100%;
+  width: 80%;
   height: 30%;
   display: flex;
   flex-direction: column;
