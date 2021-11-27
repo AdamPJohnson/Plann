@@ -52,7 +52,7 @@
   }
   .myNavButton {
     min-height: 5vh;
-    width: 100%;
+    width: 90%;
     margin: 0em 0.2em;
     font-size: 0.75rem !important;
   }
@@ -76,6 +76,7 @@
   height: 1em;
   font-size: 0.8em;
   text-align: center;
+  margin: 0.5em;
 }
 
 #datePickerPage {
@@ -168,5 +169,6 @@ label {
   justify-content: center;
   overflow: scroll;
   padding: 1em;
+  padding-top: 5em;
   border-radius: 10px;
 }

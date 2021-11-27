@@ -94,7 +94,7 @@ app.get("/events/:userId", (req, res) => {
   event
     .getAll(userId)
     .then((data) => {
-      res.status(200).send(data.rows[0].json_agg);
+      res.status(200).send(data.rows);
     })
     .catch((e) => {
       console.log("failed to fetch user events: ", e);

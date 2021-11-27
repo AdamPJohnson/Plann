@@ -18,7 +18,7 @@ function UserHome({ user }) {
   }, [user]);
   const eventList = userUpcomingEvents.length
     ? userUpcomingEvents.map((event) => {
-        return <EventListItem event={event} />;
+        return <EventListItem event={event.json_agg[0]} />;
       })
     : 'You have no upcoming events. Click "Discover" to add some!';
 

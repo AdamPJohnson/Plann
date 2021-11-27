@@ -116,6 +116,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
+        <h3>more details...</h3>
         {isOrg && (
           <>
             <label htmlFor="orgName">Organization Name</label>
