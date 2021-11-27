@@ -38,7 +38,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
       return false;
     }
     if (isOrg) {
-      if (!formData.orgName.length < 1) {
+      if (formData.orgName.length < 1) {
         setErrorMessage("Invalid organization name");
         return false;
       }

@@ -11,10 +11,10 @@ module.exports = {
   },
 
   signupOrg: async (input) => {
-    const { username, password, email, zip } = input;
+    const { orgName, username, password, email, zip, description } = input;
 
     return await pool.query(
-      `INSERT INTO orgs (username, password, email, zip) values ('${username}','${password}','${email}','${zip}') RETURNING *;`
+      `INSERT INTO orgs (name, username, password, email, zip, description) values ('${orgName}','${username}','${password}','${email}','${zip}','${description}') RETURNING *;`
     );
     ////// THIS NEEDS TO BE FINISHED
   },

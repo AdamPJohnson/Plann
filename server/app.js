@@ -70,10 +70,17 @@ app.post("/signupUser", (req, res) => {
 });
 
 app.post("/signupOrg", (req, res) => {
-  const { username, password, email, zip } = req.body;
+  const { orgName, username, password, email, zip, description } = req.body;
   const hashedPassword = sha256(password);
   signup
-    .signupOrg({ username, password: hashedPassword, email, zip })
+    .signupOrg({
+      orgName,
+      username,
+      password: hashedPassword,
+      email,
+      zip,
+      description,
+    })
     .then((data) => {
       if (data.rows[0]) {
         res.status(201).send(data.rows[0]);

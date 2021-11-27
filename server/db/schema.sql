@@ -14,6 +14,7 @@ CREATE TABLE orgs (
   email VARCHAR(60) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   reported INT NOT NULL DEFAULT 0,
+  zip INT NOT NULL,
   password VARCHAR(100) NOT NULL,
   salt VARCHAR(60) NOT NULL DEFAULT ''
 );
@@ -55,6 +56,7 @@ INSERT INTO orgs(
     email,
     description,
     password,
+    zip,
     salt
   )
 VALUES (
@@ -63,6 +65,7 @@ VALUES (
     'test@gmial.com',
     'the best bbq party in town. follow us for more information!! thanks everyone!',
     '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
+    '94606',
     ''
   ),
   (
@@ -71,6 +74,7 @@ VALUES (
     'test@gmial.com',
     'the best pizza party in town. follow us for more information!! thanks everyone!',
     'pizzaparty',
+    '94606',
     ''
   ),
   (
@@ -79,6 +83,7 @@ VALUES (
     'test@gmial.com',
     'the best egg party in town. follow us for more information!! thanks everyone!',
     'eggparty',
+    '94606',
     ''
   ),
   (
@@ -87,6 +92,7 @@ VALUES (
     'test@gmial.com',
     'the best pancake party in town. follow us for more information!! thanks everyone!',
     'pancakeparty',
+    '94606',
     ''
   );
 INSERT INTO users(username, email, zip, password, salt)
