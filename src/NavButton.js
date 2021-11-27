@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-function NavButton({ name, onClick, path }) {
+function NavButton({ name, onClick, path, customVariant }) {
+  const variant = customVariant || "outline-light";
   return (
     <Link
       to={`${path}`}
@@ -12,7 +13,7 @@ function NavButton({ name, onClick, path }) {
         justifyContent: "center",
       }}
     >
-      <Button onClick={onClick} variant="outline-light" className="myNavButton">
+      <Button onClick={onClick} variant={variant} className="myNavButton">
         {name}
       </Button>
     </Link>

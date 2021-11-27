@@ -6,6 +6,7 @@ import { FaCalendar } from "react-icons/fa";
 import FullCalendar from "fullcalendar-reactwrapper";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import Modal from "react-modal";
+import NavButton from "../NavButton";
 const events = [
   {
     title: "All Day Event",
@@ -32,18 +33,28 @@ function UserHome({ user }) {
   useEffect(() => {
     getUserUpcomingEvents(user.id);
   }, [user]);
-  const eventList = userUpcomingEvents.length
-    ? userUpcomingEvents.map((event) => {
-        return (
-          <EventListItem
-            event={event.json_agg[0]}
-            isOrg={false}
-            userId={user.id}
-            getUserUpcomingEvents={getUserUpcomingEvents}
-          />
-        );
-      })
-    : 'You have no upcoming events. Click "Discover" to add some!';
+  const eventList = userUpcomingEvents.length ? (
+    userUpcomingEvents.map((event) => {
+      return (
+        <EventListItem
+          event={event.json_agg[0]}
+          isOrg={false}
+          userId={user.id}
+          getUpcomingEvents={getUserUpcomingEvents}
+        />
+      );
+    })
+  ) : (
+    <>
+      <span>You have no upcoming events. Click "Discover" to add some!</span>
+      <br />
+      <NavButton
+        customVariant="outline-dark"
+        path="/user/discover"
+        name="Discover"
+      />
+    </>
+  );
   const customStyles = {
     content: {
       display: "flex",
