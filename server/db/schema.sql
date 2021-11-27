@@ -39,6 +39,7 @@ CREATE TABLE events (
   date BIGINT,
   description VARCHAR(1000),
   org_id INT NOT NULL,
+  zip INT NOT NULL,
   FOREIGN KEY (org_id) REFERENCES orgs(id) ON DELETE CASCADE
 );
 CREATE TABLE eventFollows (
@@ -104,9 +105,9 @@ VALUES (3, 3),
   (3, 2),
   (2, 3),
   (2, 2);
-INSERT INTO events(name, date, org_id)
-VALUES ('Big Test Party', 1605931, 1),
-  ('Other Test Party', 1605931, 1);
+INSERT INTO events(name, date, org_id, zip)
+VALUES ('Big Test Party', 1605931, 1, 94606),
+  ('Other Test Party', 1605931, 1, 94607);
 INSERT INTO eventFollows(user_id, event_id)
 VALUES (1, 1),
   (4, 1),

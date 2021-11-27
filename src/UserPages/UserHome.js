@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import EventListItem from "./EventListItem";
-import BottomRightButton from "./BottomRightButton";
+import EventListItem from "../EventListItem";
+import BottomRightButton from "../BottomRightButton";
 import { FaCalendar } from "react-icons/fa";
 import FullCalendar from "fullcalendar-reactwrapper";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";

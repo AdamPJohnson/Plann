@@ -21,14 +21,24 @@ module.exports = {
     DELETE from events WHERE org_id='${orgId}' AND id='${id}'
 `);
   },
+  unFollow: async (id, userId) => {
+    return await pool.query(`
+    DELETE from eventFollows WHERE user_id=${userId} AND event_id=${id}
+`);
+  },
+  getNearby: async (nearbyString) => {
+    return await pool.query(`
+    SELECT * from events WHERE zip in ${nearbyString}
+`);
+  },
 
   add: async (body) => {
     console.log(body);
-    const { eventName, description, id } = body;
+    const { eventName, description, id, zip } = body;
     let { date } = body;
     date = new Date(date).getTime() / 1000;
     return await pool.query(`
-     INSERT INTO events (name, date, description, org_id) VALUES('${eventName}', ${date}, '${description}','${id}')
+     INSERT INTO events (name, date, description, org_id, zip) VALUES('${eventName}', ${date}, '${description}','${id}', ${zip})
     `);
   },
 };

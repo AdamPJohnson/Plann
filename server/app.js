@@ -4,8 +4,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const sha256 = require("js-sha256");
+var zipcodes = require("zipcodes");
 
-const { signup, login, event, eventFollow } = require("./models");
+const { signup, login, event } = require("./models");
 
 app.post("/orgEvents", (req, res) => {
   event
@@ -114,8 +115,8 @@ app.get("/orgEvents/:orgId", (req, res) => {
 
 app.delete("/userEvents/:userId/:id", (req, res) => {
   const { id, userId } = req.params;
-  eventFollow
-    .delete(id, userId)
+  event
+    .unfollow(id, userId)
     .then((d) => res.status(200).send())
     .catch((e) => {
       console.log("failed to delete eventfollow: ", e);
@@ -133,6 +134,22 @@ app.delete("/orgEvents/:orgId/:id", (req, res) => {
     .catch((e) => {
       console.log("failed to delete event: ", e);
       res.status(500).send();
+    });
+});
+
+app.get("/nearbyEvents/:zip", async (req, res) => {
+  const { zip } = req.params;
+
+  const nearby = zipcodes.radius(zip, 5);
+  let nearbyString = "(";
+  nearby.forEach((zip) => (nearbyString += `'${zip}', `));
+  nearbyString = nearbyString.slice(0, -2) + ")";
+  event
+    .getNearby(nearbyString)
+    .then((d) => res.status(200).send(d.rows))
+    .catch((e) => {
+      res.status(500).send();
+      console.log(e);
     });
 });
 module.exports = app;

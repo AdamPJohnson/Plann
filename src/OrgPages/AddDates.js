@@ -3,10 +3,10 @@ import "react-dates/lib/css/_datepicker.css";
 // import { SingleDatePicker } from "react-dates";
 import DatePicker from "react-datepicker";
 import AddDateButton from "./AddDateButton";
-import EventListItem from "./EventListItem";
+import EventListItem from "../EventListItem";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-function MyDatePicker({ user }) {
+function AddDates({ user }) {
   const url = "http://localhost:8080/orgEvents";
 
   const [date, setDate] = useState(new Date());
@@ -21,7 +21,13 @@ function MyDatePicker({ user }) {
   };
   const submitDate = () => {
     const { eventName, description } = formData;
-    const payload = { date, eventName, description, id: user.id };
+    const payload = {
+      date,
+      eventName,
+      description,
+      id: user.id,
+      zip: user.zip,
+    };
     axios
       .post(url, payload)
       .then((data) => console.log(data))
@@ -81,4 +87,4 @@ function MyDatePicker({ user }) {
   );
 }
 
-export default MyDatePicker;
+export default AddDates;

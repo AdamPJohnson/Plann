@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EventListItem from "./EventListItem";
+import EventListItem from "../EventListItem";
 import axios from "axios";
 function OrgHome({ user }) {
   const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);

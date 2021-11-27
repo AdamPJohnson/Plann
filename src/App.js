@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
 import "react-dates/initialize";
-import MyDatePicker from "./MyDatePicker.js";
+import AddDates from "./OrgPages/AddDates.js";
 import LoginForm from "./LoginForm.js";
 import SignUpForm from "./SignUpForm.js";
 import Header from "./Header.js";
-import UserHome from "./UserHome.js";
-import OrgHome from "./OrgHome.js";
-import UserProfile from "./UserProfile.js";
-import UserDiscover from "./UserDiscover.js";
+import UserHome from "./UserPages/UserHome.js";
+import OrgHome from "./OrgPages/OrgHome.js";
+import UserProfile from "./UserPages/UserProfile.js";
+import UserDiscover from "./UserPages/UserDiscover.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
@@ -25,7 +25,7 @@ function App() {
       </Route>
       <Route path="/org">
         <Route path="/org/home" element={<OrgHome user={user} />} />
-        <Route path="/org/addDates" element={<MyDatePicker user={user} />} />
+        <Route path="/org/addDates" element={<AddDates user={user} />} />
       </Route>
     </>
   ) : (
