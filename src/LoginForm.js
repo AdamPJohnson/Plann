@@ -10,13 +10,13 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
     const userOrg = isOrg ? "Org" : "User";
     axios
       .post(`http://localhost:8080/login${userOrg}`, { ...formData })
       .then((data) => {
         setIsLoggedIn(true);
-        console.log({ data });
+
         setUser(data.data);
         navigate(`../${userOrg}/home`);
       })

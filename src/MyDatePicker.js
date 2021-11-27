@@ -1,36 +1,41 @@
-import React, { useState } from "react";
-import useDatePicker from "./useDatePicker";
+import React, { useState, useEffect } from "react";
 import "react-dates/lib/css/_datepicker.css";
 // import { SingleDatePicker } from "react-dates";
 import DatePicker from "react-datepicker";
 import AddDateButton from "./AddDateButton";
 import EventListItem from "./EventListItem";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+function MyDatePicker({ user }) {
+  const url = "http://localhost:8080/orgEvents";
 
-function MyDatePicker() {
-  const url = "http://localhost:8080/dates";
-  const user = "doug";
-  const [date, setDate, submitDate] = useDatePicker(url, { user });
-  const [currentDates, setCurrentDates] = useState([
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-    {
-      date: "Thu Nov 11 2021 17:56:48 GMT-0800 (Pacific Standard Time)",
-      eventName: "JellyRoll Party",
-    },
-  ]);
+  const [date, setDate] = useState(new Date());
+  const submitDate = () => {
+    const payload = { date, ...user };
+    axios
+      .post(url, payload)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
+  const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);
+  const getOrgUpcomingEvents = (id) => {
+    axios
+      .get(`http://localhost:8080/orgEvents/${id}`)
+      .then((data) => {
+        console.log("fetched events: ", data);
+        setOrgUpcomingEvents(data.data);
+      })
+      .catch((e) => console.log(e));
+  };
+  useEffect(() => {
+    getOrgUpcomingEvents(user.id);
+  }, [user]);
   const handleDateChange = (input) => {
-    console.log(input);
     setDate(input);
   };
 
-  const datesList = currentDates.map((date) => {
+  const datesList = orgUpcomingEvents.map((date) => {
     return <EventListItem event={date} />;
   });
   return (

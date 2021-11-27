@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 function AddDateButton({ date, submitDate }) {
   const onClick = () => {
-    console.log(date);
+    /////verify date is in the future
     submitDate();
   };
   return (
