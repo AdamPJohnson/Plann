@@ -61,7 +61,7 @@ VALUES (
     'bbqparty',
     'test@gmial.com',
     'the best bbq party in town. follow us for more information!! thanks everyone!',
-    'bbqparty',
+    '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
     ''
   ),
   (
@@ -96,7 +96,7 @@ VALUES ('Doug', 'test@gmial.com', 94606, 'doug', ''),
     'adam',
     'test@gmial.com',
     94606,
-    'password',
+    '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
     ''
   );
 INSERT INTO orgFollows(user_id, org_id)

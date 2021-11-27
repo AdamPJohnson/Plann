@@ -67,10 +67,6 @@
   justify-content: center;
 }
 
-input {
-  margin: 0.2em !important;
-}
-
 .mySubmitButton {
   width: 40%;
 }
@@ -79,6 +75,7 @@ input {
   color: red;
   height: 1em;
   font-size: 0.8em;
+  text-align: center;
 }
 
 #datePickerPage {
@@ -135,10 +132,12 @@ input {
   font-weight: bold;
 }
 
-input {
+input,
+textArea {
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
   border-width: 0px;
   border-radius: 3px;
+  margin: 0.2em !important;
 }
 
 label {

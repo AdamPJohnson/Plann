@@ -13,6 +13,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
     orgName: "",
     email: "",
     zip: "",
+    description: "",
   });
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,24 +23,47 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
 
     setModalIsOpen(true);
   };
+  const verifyForm = () => {
+    if (formData.password.length < 8) {
+      setErrorMessage("Password must be at least 8 characters long");
+      return false;
+    }
+    if (formData.zip.length !== 5) {
+      setErrorMessage("Invalid zip");
+      return false;
+    }
+    if (!formData.email.includes("@")) {
+      ////// edit to real regex
+      setErrorMessage("Invalid email");
+      return false;
+    }
+    if (isOrg) {
+      if (!formData.orgName.length < 1) {
+        setErrorMessage("Invalid organization name");
+        return false;
+      }
+    }
+    return true;
+  };
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const userOrg = isOrg ? "org" : "user";
-    axios
-      .post(`http://localhost:8080/signup${userOrg}`, { ...formData })
-      .then((data) => {
-        setIsLoggedIn(true);
-        setUser(data.data);
-        navigate(`../${userOrg}/home`);
-      })
-      .catch((error) => {
-        setErrorMessage("Username Already Taken");
-        console.log({ error });
-      });
+    if (verifyForm()) {
+      const userOrg = isOrg ? "org" : "user";
+      axios
+        .post(`http://localhost:8080/signup${userOrg}`, { ...formData })
+        .then((data) => {
+          setIsLoggedIn(true);
+          setUser(data.data);
+          navigate(`../${userOrg}/home`);
+        })
+        .catch((error) => {
+          setErrorMessage("Username Already Taken");
+          console.log({ error });
+        });
+    }
   };
   const handleToggle = () => {
-    console.log(isOrg);
     setIsOrg((prev) => !prev);
   };
   const customStyles = {
@@ -120,7 +144,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         <label htmlFor="zip">Zip Code</label>
         <input
           onChange={onChange}
-          type="text"
+          type="number"
           name="zip"
           value={formData.zip}
         />
@@ -130,6 +154,13 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
           type="text"
           name="email"
           value={formData.email}
+        />
+        <label htmlFor="description">Description</label>
+        <textarea
+          onChange={onChange}
+          type="text"
+          name="description"
+          value={formData.description}
         />
         <Button
           variant="outline-dark"

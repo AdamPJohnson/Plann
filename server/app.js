@@ -52,6 +52,8 @@ app.post("/loginOrg", (req, res) => {
 app.post("/signupUser", (req, res) => {
   const { username, password, email, zip } = req.body;
   const hashedPassword = sha256(password);
+  console.log(hashedPassword);
+
   signup
     .signupUser({ username, password: hashedPassword, email, zip })
     .then((data) => {
@@ -67,10 +69,10 @@ app.post("/signupUser", (req, res) => {
       res.status(500).send(err);
     });
 });
+
 app.post("/signupOrg", (req, res) => {
   const { username, password, email, zip } = req.body;
   const hashedPassword = sha256(password);
-
   signup
     .signupOrg({ username, password: hashedPassword, email, zip })
     .then((data) => {

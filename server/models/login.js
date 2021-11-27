@@ -9,9 +9,9 @@ module.exports = {
   },
 
   loginOrg: async (input) => {
-    const { username, password } = input;
+    const { username } = input;
     return await pool.query(
-      `SELECT * from orgs WHERE username='${username.toLowerCase()}' AND password='${password}'`
+      `SELECT * from orgs WHERE username='${username.toLowerCase()}'`
     );
   },
 };
