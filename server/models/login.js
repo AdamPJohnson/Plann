@@ -2,9 +2,9 @@ const pool = require("../postgresConfig");
 
 module.exports = {
   loginUser: async (input) => {
-    const { username, password } = input;
+    const { username } = input;
     return await pool.query(
-      `SELECT * from users WHERE username='${username.toLowerCase()}' AND password='${password}'`
+      `SELECT * from users WHERE username='${username.toLowerCase()}'`
     );
   },
 

@@ -21,7 +21,12 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         navigate(`../${userOrg}/home`);
       })
       .catch((error) => {
-        setErrorMessage("Invalid Username or Password");
+        console.log(error);
+        if (error.response.status === 400) {
+          setErrorMessage("Invalid Password");
+        } else if (error.response.status === 404) {
+          setErrorMessage("Invalid Username");
+        }
         console.log({ error });
       });
   };
