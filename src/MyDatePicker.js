@@ -10,8 +10,18 @@ function MyDatePicker({ user }) {
   const url = "http://localhost:8080/orgEvents";
 
   const [date, setDate] = useState(new Date());
+  const [formData, setFormData] = useState({
+    eventName: "",
+    description: "",
+  });
+  const onChange = (e) => {
+    let newFormData = { ...formData };
+    newFormData[e.target.name] = e.target.value;
+    setFormData(newFormData);
+  };
   const submitDate = () => {
-    const payload = { date, ...user };
+    const { eventName, description } = formData;
+    const payload = { date, eventName, description, id: user.id };
     axios
       .post(url, payload)
       .then((data) => console.log(data))
@@ -46,6 +56,20 @@ function MyDatePicker({ user }) {
           showTimeSelect
           selected={date}
           onChange={handleDateChange}
+        />
+        <label htmlFor="name">Event Name</label>
+        <input
+          type="text"
+          onChange={onChange}
+          name="eventName"
+          value={formData.name}
+        />
+        <label htmlFor="description">Event Description</label>
+        <textarea
+          id="eventDescription"
+          name="description"
+          value={formData.description}
+          onChange={onChange}
         />
         <AddDateButton submitDate={submitDate} date={date} />
       </div>

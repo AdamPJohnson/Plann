@@ -14,6 +14,8 @@ function EventListItem({ event, isOrg, userId, getUpcomingEvents }) {
     <div className="eventListItem">
       <span className="eventName">{event.name}</span>
       <br />
+      <span className="eventDescription">{event.description}</span>
+      <br />
       <span className="eventDate">
         {new Date(Number(event.date)).toLocaleString()}
       </span>
