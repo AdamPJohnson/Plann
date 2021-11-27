@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import EventListItem from "./EventListItem";
+import BottomRightButton from "./BottomRightButton";
+
+import { FaCalendar } from "react-icons/fa";
 function UserHome({ user }) {
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const getUserUpcomingEvents = (id) => {
@@ -23,10 +26,11 @@ function UserHome({ user }) {
     : 'You have no upcoming events. Click "Discover" to add some!';
 
   return (
-    <div id="userHome">
+    <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
       <div id="userUpcomingEventsContainer">{eventList}</div>
+      <BottomRightButton icon={<FaCalendar />} />
     </div>
   );
 }

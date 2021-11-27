@@ -7,6 +7,8 @@ import SignUpForm from "./SignUpForm.js";
 import Header from "./Header.js";
 import UserHome from "./UserHome.js";
 import OrgHome from "./OrgHome.js";
+import UserProfile from "./UserProfile.js";
+import UserDiscover from "./UserDiscover.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
@@ -18,6 +20,8 @@ function App() {
     <>
       <Route path="/user">
         <Route path="/user/home" element={<UserHome user={user} />} />
+        <Route path="/user/profile" element={<UserProfile user={user} />} />
+        <Route path="/user/discover" element={<UserDiscover user={user} />} />
       </Route>
       <Route path="/org">
         <Route path="/org/home" element={<OrgHome user={user} />} />

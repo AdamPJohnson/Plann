@@ -34,6 +34,7 @@
   min-height: 5vh;
   margin: 0em 0.2em;
   font-size: 0.75rem !important;
+  display: flex;
 }
 
 @media screen and (min-width: 600px) {
@@ -43,6 +44,10 @@
   }
   .myNavButton {
     width: 30%;
+  }
+  .bottomRightButton {
+    width: 5vw;
+    height: 5vw;
   }
 }
 @media screen and (max-width: 600px) {
@@ -55,6 +60,10 @@
     width: 90%;
     margin: 0em 0.2em;
     font-size: 0.75rem !important;
+  }
+  .bottomRightButton {
+    width: 12vw;
+    height: 12vw;
   }
 }
 #loginForm {
@@ -145,13 +154,14 @@ label {
   font-size: 0.8em;
 }
 
-#userHome {
+#userPage {
   /* border: 1px solid black; */
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 #welcome {
@@ -171,4 +181,23 @@ label {
   padding: 1em;
   padding-top: 5em;
   border-radius: 10px;
+}
+
+.bottomRightButton {
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+  border-radius: 50% !important;
+  box-shadow: inset -1px -1px 5px rgba(255, 255, 255, 0.3);
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomRightButton:active {
+  box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5);
+}
+.bottomRightButton:active {
+  box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.3);
 }
