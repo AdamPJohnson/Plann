@@ -1,7 +1,7 @@
 /* psql -U postgres < server/db/schema.sql  THIS ONE!!!*/
 DROP DATABASE IF EXISTS datepicker;
 CREATE DATABASE datepicker;
-\c datepicker;
+\c  datepicker;
 DROP TABLE IF EXISTS eventFollows;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS orgFollows;
@@ -113,6 +113,12 @@ VALUES (3, 3),
   (2, 2);
 INSERT INTO events(name, date, org_id, zip)
 VALUES ('Big Test Party', 1605931, 1, 94606),
+  ('Other Test Party', 1605931, 1, 94607),
+  ('Other Test Party', 1605931, 1, 94607),
+  ('Other Test Party', 1605931, 1, 94607),
+  ('Other Test Party', 1605931, 1, 94607),
+  ('Other Test Party', 1605931, 1, 94607),
+  ('Other Test Party', 1605931, 1, 94607),
   ('Other Test Party', 1605931, 1, 94607);
 INSERT INTO eventFollows(user_id, event_id)
 VALUES (1, 1),

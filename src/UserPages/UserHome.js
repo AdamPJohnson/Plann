@@ -74,7 +74,7 @@ function UserHome({ user }) {
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
-      <div id="userUpcomingEventsContainer">{eventList}</div>
+      <div id="upcomingEventsContainer">{eventList}</div>
       <BottomRightButton
         onClick={() => setModalIsOpen(true)}
         icon={<FaCalendar />}

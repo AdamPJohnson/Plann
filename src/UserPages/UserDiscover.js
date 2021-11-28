@@ -18,8 +18,9 @@ function UserProfile({ user }) {
     <NearbyEventListItem event={event} />
   ));
   return (
-    <div id="userPage">
-      {nearbyEventList}
+    <div id="discoverPage">
+      <h2>Nearby Events</h2>
+      <div id="nearbyEventList">{nearbyEventList}</div>
       <BottomRightButton icon={<BsSearch />} />
     </div>
   );
