@@ -69,7 +69,7 @@ function UserHome({ user }) {
       transform: "translateX(-50%)",
     },
   };
-
+  console.log({ user });
   return (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>

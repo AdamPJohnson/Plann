@@ -1,15 +1,17 @@
 const pool = require("../postgresConfig");
 
 module.exports = {
-  loginUser: async (input) => {
-    return await pool.query(`
-    `);
+  insert: (hash) => {
+    return pool.query(`INSERT INTO sessions (hash) VALUES('${hash}')`);
   },
-
-  loginOrg: async (input) => {
-    const { username } = input;
-    return await pool.query(
-      `SELECT * from orgs WHERE username='${username.toLowerCase()}'`
-    );
+  check: (hash) => {
+    return pool.query(`SELECT * FROM sessions where hash='${hash}'`);
+  },
+  addUser: (hash, id) => {
+    return pool.query(`UPDATE sessions SET user_id=${id} WHERE hash='${hash}'`);
+  },
+  removeUser: (hash, id) => {
+    return pool.query(`
+    `);
   },
 };

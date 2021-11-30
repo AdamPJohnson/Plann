@@ -17,6 +17,13 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
       .then((data) => {
         setIsLoggedIn(true);
 
+        axios.put(
+          `http://localhost:8080/session/`,
+          { id: data.data.id },
+          {
+            withCredentials: true,
+          }
+        );
         setUser(data.data);
         navigate(`../${userOrg}/home`);
       })

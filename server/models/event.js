@@ -33,7 +33,6 @@ module.exports = {
   },
 
   add: async (body) => {
-    console.log(body);
     const { eventName, description, id, zip } = body;
     let { date } = body;
     date = new Date(date).getTime() / 1000;

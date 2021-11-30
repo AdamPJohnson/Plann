@@ -3,27 +3,42 @@ const cors = require("cors");
 var cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(cookieParser());
 const sha256 = require("js-sha256");
 var zipcodes = require("zipcodes");
 
-const { signup, login, event } = require("./models");
+const { signup, login, event, session, user } = require("./models");
 
-app.get("/session", (req, res) => {
-  console.log(req.cookies);
+app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
-    console.log("no cookie");
     const hash = sha256((Math.random() * 1000).toString());
-    console.log(hash);
     res.cookie("eventSession", hash);
+    session.insert(hash);
   } else {
-    console.log("cookie");
-  }
+    const hash = req.cookies.eventSession;
 
-  res.send();
+    let currentSession = await session.check(hash);
+    if (currentSession.rows[0].user_id) {
+      ////select and return user
+      const currentUser = await user.getOne(currentSession.rows[0].user_id);
+
+      res.status(200).send(currentUser.rows[0]);
+    } else {
+      res.status(200).send(false);
+      //// return no user
+    }
+  }
 });
 
+app.put("/session/", async (req, res) => {
+  const { id } = req.body;
+  const hash = req.cookies.eventSession;
+  session
+    .addUser(hash, id)
+    .then((d) => console.log(d))
+    .catch((e) => console.log(e));
+});
 app.post("/orgEvents", (req, res) => {
   event
     .add(req.body)

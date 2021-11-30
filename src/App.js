@@ -18,13 +18,16 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log("sesss");
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
       .then((result) => {
-        console.log(result);
+        console.log(result.data);
+        if (result.data) {
+          setUser(result.data);
+          setIsLoggedIn(true);
+        }
       });
-  });
+  }, []);
   const main = isLoggedIn ? (
     <>
       <Route path="/user">

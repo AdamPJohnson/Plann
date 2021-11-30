@@ -54,6 +54,15 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         .post(`http://localhost:8080/signup${userOrg}`, { ...formData })
         .then((data) => {
           setIsLoggedIn(true);
+
+          axios.put(
+            `http://localhost:8080/session/`,
+            { id: data.data.id },
+            {
+              withCredentials: true,
+            }
+          );
+
           setUser(data.data);
           navigate(`../${userOrg}/home`);
         })
