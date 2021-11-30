@@ -2,7 +2,15 @@ import React from "react";
 
 function NearbyEventListItem({ event }) {
   console.log(event);
-  return <div className="nearbyEventListItem">{event.name}</div>;
+  const date = new Date(Number(event.date)).toLocaleString();
+  console.log({ date });
+  return (
+    <div className="nearbyEventListItem">
+      <span>{event.name}</span>
+      <br />
+      <span>{date}</span>
+    </div>
+  );
 }
 
 export default NearbyEventListItem;

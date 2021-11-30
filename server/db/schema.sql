@@ -1,4 +1,9 @@
 /* psql -U postgres < server/db/schema.sql  THIS ONE!!!*/
+
+
+
+
+/* DELETE CASCADE QUESTION */
 DROP DATABASE IF EXISTS datepicker;
 CREATE DATABASE datepicker;
 \c  datepicker;

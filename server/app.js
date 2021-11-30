@@ -1,12 +1,28 @@
 const express = require("express");
 const cors = require("cors");
+var cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 const sha256 = require("js-sha256");
 var zipcodes = require("zipcodes");
 
 const { signup, login, event } = require("./models");
+
+app.get("/session", (req, res) => {
+  console.log(req.cookies);
+  if (!req.cookies.eventSession) {
+    console.log("no cookie");
+    const hash = sha256((Math.random() * 1000).toString());
+    console.log(hash);
+    res.cookie("eventSession", hash);
+  } else {
+    console.log("cookie");
+  }
+
+  res.send();
+});
 
 app.post("/orgEvents", (req, res) => {
   event

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "react-dates/initialize";
+import axios from "axios";
 import AddDates from "./OrgPages/AddDates.js";
 import LoginForm from "./LoginForm.js";
 import SignUpForm from "./SignUpForm.js";
@@ -16,6 +17,14 @@ function App() {
   const [isOrg, setIsOrg] = useState(false);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    console.log("sesss");
+    axios
+      .get("http://localhost:8080/session", { withCredentials: true })
+      .then((result) => {
+        console.log(result);
+      });
+  });
   const main = isLoggedIn ? (
     <>
       <Route path="/user">

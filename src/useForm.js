@@ -12,3 +12,4 @@ const useForm = (inputs) => {
 };
 
 export default useForm;
+ 
