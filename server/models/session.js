@@ -11,7 +11,7 @@ module.exports = {
     return pool.query(`UPDATE sessions SET user_id=${id} WHERE hash='${hash}'`);
   },
   removeUser: (hash, id) => {
-    return pool.query(`
+    return pool.query(`UPDATE sessions SET user_id=NULL WHERE hash='${hash}'
     `);
   },
 };

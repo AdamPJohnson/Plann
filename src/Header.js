@@ -2,9 +2,16 @@ import React from "react";
 import NavButton from "./NavButton";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
-function Header({ isOrg, isLoggedIn, setIsLoggedIn }) {
+function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }) {
   const logOut = () => {
     setIsLoggedIn(false);
+    axios.patch(
+      `http://localhost:8080/logout/`,
+      { id: user.id },
+      {
+        withCredentials: true,
+      }
+    );
   };
   const headerUserType = isOrg ? (
     <header className="App-header loggedIn">

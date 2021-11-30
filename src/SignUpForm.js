@@ -55,14 +55,13 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         .then((data) => {
           setIsLoggedIn(true);
 
-          axios.put(
+          axios.patch(
             `http://localhost:8080/session/`,
             { id: data.data.id },
             {
               withCredentials: true,
             }
           );
-
           setUser(data.data);
           navigate(`../${userOrg}/home`);
         })

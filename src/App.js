@@ -28,8 +28,11 @@ function App() {
         }
       });
   }, []);
+  const home = isOrg ? <OrgHome user={user} /> : <UserHome user={user} />;
   const main = isLoggedIn ? (
     <>
+      <Route path="/" element={home} />
+
       <Route path="/user">
         <Route path="/user/home" element={<UserHome user={user} />} />
         <Route path="/user/profile" element={<UserProfile user={user} />} />
@@ -85,6 +88,7 @@ function App() {
           isOrg={isOrg}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
+          user={user}
         />
         <div id="mainContainer">
           <Routes>{main}</Routes>
