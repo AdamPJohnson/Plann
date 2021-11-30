@@ -1,7 +1,11 @@
 import React from "react";
 import NavButton from "./NavButton";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
 function Header({ isOrg, isLoggedIn, setIsLoggedIn }) {
+  const logOut = () => {
+    setIsLoggedIn(false);
+  };
   const headerUserType = isOrg ? (
     <header className="App-header loggedIn">
       <NavButton path="/org/home" name="Home" />
@@ -18,7 +22,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn }) {
       <NavButton path="/user/home" name="Home" />
       <NavButton path="/user/profile" name="Profile" />
       <NavButton path="/user/discover" name="Discover" />
-      <NavButton path="/" onClick={() => setIsLoggedIn(false)} name="Log Out" />
+      <NavButton path="/" onClick={logOut} name="Log Out" />
     </header>
   );
 

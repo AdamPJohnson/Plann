@@ -15,11 +15,13 @@ app.get("/session", async (req, res) => {
     const hash = sha256((Math.random() * 1000).toString());
     res.cookie("eventSession", hash);
     session.insert(hash);
+    res.status(200).send();
   } else {
     const hash = req.cookies.eventSession;
-
+    console.log(hash);
     let currentSession = await session.check(hash);
-    if (currentSession.rows[0].user_id) {
+    console.log("crreutn", currentSession);
+    if (currentSession.rows[0] && currentSession.rows[0].user_id) {
       ////select and return user
       const currentUser = await user.getOne(currentSession.rows[0].user_id);
 
