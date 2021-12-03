@@ -9,7 +9,7 @@ const sha256 = require("js-sha256");
 var zipcodes = require("zipcodes");
 
 const { signup, login, event, session, user } = require("./models");
-
+/////try/catch here?
 app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
     const hash = sha256((Math.random() * 1000).toString());
@@ -18,17 +18,12 @@ app.get("/session", async (req, res) => {
     res.status(200).send();
   } else {
     const hash = req.cookies.eventSession;
-    console.log(hash);
     let currentSession = await session.check(hash);
-    console.log("crreutn", currentSession);
     if (currentSession.rows[0] && currentSession.rows[0].user_id) {
-      ////select and return user
       const currentUser = await user.getOne(currentSession.rows[0].user_id);
-
       res.status(200).send(currentUser.rows[0]);
     } else {
       res.status(200).send(false);
-      //// return no user
     }
   }
 });
@@ -185,10 +180,10 @@ app.delete("/orgEvents/:orgId/:id", (req, res) => {
     });
 });
 
-app.get("/nearbyEvents/:zip", async (req, res) => {
-  const { zip } = req.params;
-
-  const nearby = zipcodes.radius(zip, 5);
+app.get("/nearbyEvents/:zip/:dist", async (req, res) => {
+  const { zip, dist } = req.params;
+  const distance = dist || 5;
+  const nearby = zipcodes.radius(zip, distance);
   let nearbyString = "(";
   nearby.forEach((zip) => (nearbyString += `'${zip}', `));
   nearbyString = nearbyString.slice(0, -2) + ")";

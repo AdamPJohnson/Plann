@@ -10,13 +10,12 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-
     const userOrg = isOrg ? "org" : "user";
+
     axios
       .post(`http://localhost:8080/login${userOrg}`, { ...formData })
       .then((data) => {
-        setIsLoggedIn(true);
-
+        console.log("here!!!");
         axios.patch(
           `http://localhost:8080/session/`,
           { id: data.data.id },
@@ -24,7 +23,9 @@ function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
             withCredentials: true,
           }
         );
+        console.log({ data });
         setUser(data.data);
+        setIsLoggedIn(true);
         navigate(`../${userOrg}/home`);
       })
       .catch((error) => {

@@ -18,6 +18,7 @@ const events = [
   },
 ];
 function UserHome({ user }) {
+  console.log(user);
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const getUserUpcomingEvents = (id) => {
@@ -69,7 +70,7 @@ function UserHome({ user }) {
       transform: "translateX(-50%)",
     },
   };
-  console.log({ user });
+
   return (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>
