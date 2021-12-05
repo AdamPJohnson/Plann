@@ -117,7 +117,9 @@ INSERT INTO orgFollows(user_id, org_id)
 VALUES (3, 3),
   (3, 2),
   (2, 3),
-  (2, 2);
+  (2, 2),
+  (4,1),
+  (4,2);
 INSERT INTO events(name, date, org_id, zip)
 VALUES ('Big Test Party', 1605931, 1, 94606),
   ('Other Test Party', 1605931, 1, 94607),

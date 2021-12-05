@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BottomRightButton from "../BottomRightButton";
 import { BsGearFill } from "react-icons/bs";
-function UserProfile() {
+import FollowingListItem from "./FollowingListItem";
+import axios from "axios";
+function UserProfile({ user }) {
+  const [loading, setLoading] = useState(true);
+  const [following, setFollowing] = useState([]);
+  const followingList = following.map((org) => {
+    return <FollowingListItem org={org} />;
+  });
+  console.log(user);
+  useEffect(() => {
+    const { id } = user;
+    axios
+      .get(`http://localhost:8080/orgFollows/${id}`)
+      .then((orgs) => setFollowing(orgs.data))
+      .catch((e) => console.log(e));
+  }, [user]);
+
   return (
     <div id="userPage">
+      <div id="userProfile">
+        <strong id="profileUserName">Username</strong>
+        <br />
+        <span id="profileUserName">{user.username}</span>
+        <br />
+        <strong id="profileEmail">Email</strong>
+        <br />
+        <span id="profileEmail">{user.email}</span>
+        <br />
+        <strong id="profileEmail">Following</strong>
+        <div id="profileFollowing">{followingList}</div>
+        <br />
+      </div>
       <BottomRightButton icon={<BsGearFill />} />
     </div>
   );

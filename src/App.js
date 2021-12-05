@@ -21,8 +21,10 @@ function App() {
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
       .then((result) => {
-        console.log(result.data);
+        console.log({ result });
         if (result.data) {
+          console.log(result.data);
+          console.log("result.data");
           setUser(result.data);
           setIsLoggedIn(true);
         }

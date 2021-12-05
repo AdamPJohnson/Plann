@@ -155,6 +155,18 @@ app.get("/orgEvents/:orgId", (req, res) => {
       res.status(404).send([]);
     });
 });
+app.get("/orgFollows/:userId", (req, res) => {
+  const { userId } = req.params;
+  user
+    .getOrgFollows(userId)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((e) => {
+      console.log("failed to fetch user events: ", e);
+      res.status(404).send([]);
+    });
+});
 
 app.delete("/userEvents/:userId/:id", (req, res) => {
   const { id, userId } = req.params;
