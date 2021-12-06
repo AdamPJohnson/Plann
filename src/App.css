@@ -1,3 +1,7 @@
+:root {
+  --listItemShadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  --listContainerShadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
 .App {
   text-align: center;
   height: 100vh;
@@ -37,7 +41,12 @@
   display: flex;
 }
 
+/*browser*/
+
 @media screen and (min-width: 600px) {
+  .followingListItem {
+    min-height: 50%;
+  }
   #loginForm {
     width: 20vw;
     height: 20vw;
@@ -56,6 +65,9 @@
   #upcomingEventsContainer {
     width: 60%;
     height: 30%;
+  }
+  #profileFollowing {
+    width: 50%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -80,6 +92,8 @@
   #upcomingEventsContainer {
     width: 90%;
     height: 30%;
+  }
+  #profileFollowing {
   }
 }
 
@@ -142,7 +156,7 @@
 }
 
 .eventListItem {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--listItemShadow);
   border-radius: 5px;
   padding: 0.7em;
   width: 80%;
@@ -193,16 +207,29 @@ label {
 }
 
 #profileFollowing {
+  box-shadow: var(--listContainerShadow);
+  border-radius: 3px;
+
   height: 30%;
-  width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
 }
 .followingListItem {
-  height: 30%;
-  border: 1px solid black;
-  width: 60%;
+  box-shadow: var(--listItemShadow);
+
+  min-width: 90%;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+.followingOrgDescription {
+  font-size: 0.8em;
+}
+.followingListButton {
+  margin: 0.1em;
 }
 
 #welcome {
@@ -210,7 +237,7 @@ label {
 }
 
 #upcomingEventsContainer {
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--listContainerShadow);
   border-radius: 3px;
 
   display: flex;
@@ -310,11 +337,17 @@ label {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   margin: 1em;
   padding: 1em;
-  max-height: 5vh;
+  height: 5vh;
   border-radius: 5px;
   box-sizing: content-box;
+  line-height: 0.6em;
 }
-
+.nearbyEventDate {
+  font-size: 0.5em;
+}
+.nearbyEventButton {
+  margin: 0.1em;
+}
 #nearbyEventList {
   display: flex;
   flex-direction: row;
@@ -323,5 +356,6 @@ label {
   justify-content: center;
   width: 80%;
   height: 80%;
+  overflow: scroll;
   /* border: 1px solid black; */
 }

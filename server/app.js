@@ -13,7 +13,9 @@ const { signup, login, event, session, user } = require("./models");
 app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
     const hash = sha256((Math.random() * 1000).toString());
-    res.cookie("eventSession", hash);
+    res.cookie("eventSession", hash, {
+      expires: new Date(Date.now() + 1800000), ///30 minute cookie
+    });
     session.insert(hash);
     res.status(200).send();
   } else {
@@ -192,9 +194,10 @@ app.delete("/orgEvents/:orgId/:id", (req, res) => {
     });
 });
 
-app.get("/nearbyEvents/:zip/:dist", async (req, res) => {
-  const { zip, dist } = req.params;
-  const distance = dist || 5;
+app.get("/nearbyEvents/:zip/", async (req, res) => {
+  const { zip } = req.params;
+  console.log({ zip });
+  const distance = 5;
   const nearby = zipcodes.radius(zip, distance);
   let nearbyString = "(";
   nearby.forEach((zip) => (nearbyString += `'${zip}', `));

@@ -1,13 +1,27 @@
 import React from "react";
-
+import Button from "react-bootstrap/button";
 function NearbyEventListItem({ event }) {
-  console.log(event);
-  const date = new Date(Number(event.date)).toLocaleString();
+  const date = new Date(parseInt(event.date)).toLocaleString();
+  const followed = false;
+  const actionButton = followed ? (
+    <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+      Unfollow
+    </Button>
+  ) : (
+    <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+      Follow
+    </Button>
+  );
   return (
     <div className="nearbyEventListItem">
       <span>{event.name}</span>
       <br />
-      <span>{date}</span>
+      <span className="nearbyEventDate">{date}</span>
+      <br />
+      <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+        Details
+      </Button>
+      {actionButton}
     </div>
   );
 }
