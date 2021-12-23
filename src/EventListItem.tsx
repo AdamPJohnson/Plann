@@ -1,7 +1,21 @@
 import axios from "axios";
 import React from "react";
 
-function EventListItem({ event, isOrg, userId, getUpcomingEvents }) {
+import Event from "./Interfaces/Event";
+
+interface EventListItemProps {
+  event: Event;
+  isOrg: boolean;
+  userId: number;
+  getUpcomingEvents: (userId: number) => void;
+}
+
+function EventListItem({
+  event,
+  isOrg,
+  userId,
+  getUpcomingEvents,
+}: EventListItemProps) {
   const onDelete = () => {
     const userOrg = isOrg ? "org" : "user";
     axios

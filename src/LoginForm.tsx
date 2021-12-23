@@ -4,11 +4,24 @@ import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import axios from "axios";
-function LoginForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
+import User from "./Interfaces/User";
+
+interface LoginFormProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isOrg: boolean;
+  setIsOrg: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+function LoginForm({
+  setIsLoggedIn,
+  isOrg,
+  setIsOrg,
+  setUser,
+}: LoginFormProps) {
   const [formData, onChange] = useForm({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const userOrg = isOrg ? "org" : "user";
 

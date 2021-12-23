@@ -1,7 +1,15 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-function NavButton({ name, onClick, path, customVariant }) {
+
+interface NavButtonProps {
+  name: String;
+  onClick?: () => void;
+  path: string;
+  customVariant?: string;
+}
+
+function NavButton({ name, onClick, path, customVariant }: NavButtonProps) {
   const variant = customVariant || "outline-light";
   return (
     <Link

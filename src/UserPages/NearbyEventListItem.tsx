@@ -1,6 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/button";
-function NearbyEventListItem({ event }) {
+import Event from "../Interfaces/Event";
+interface NearbyEventListItemProps {
+  event: Event;
+}
+function NearbyEventListItem({ event }: NearbyEventListItemProps) {
   const date = new Date(parseInt(event.date)).toLocaleString();
   const followed = false;
   const actionButton = followed ? (

@@ -10,6 +10,7 @@ var zipcodes = require("zipcodes");
 
 const { signup, login, event, session, user } = require("./models");
 /////try/catch here?
+
 app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
     const hash = sha256((Math.random() * 1000).toString());
@@ -59,17 +60,20 @@ app.post("/orgEvents", (req, res) => {
 app.post("/loginUser", (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = sha256(password);
-  login.loginUser({ username }).then((data) => {
-    if (data.rows[0]) {
-      if (data.rows[0].password === hashedPassword) {
-        res.status(200).send(data.rows[0]);
+  login
+    .loginUser({ username })
+    .then((data) => {
+      if (data.rows[0]) {
+        if (data.rows[0].password === hashedPassword) {
+          res.status(200).send(data.rows[0]);
+        } else {
+          res.status(400).send();
+        }
       } else {
-        res.status(400).send();
+        res.status(404).send();
       }
-    } else {
-      res.status(404).send();
-    }
-  });
+    })
+    .catch((e) => console.log(e));
 });
 
 app.post("/loginOrg", (req, res) => {

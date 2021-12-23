@@ -1,7 +1,7 @@
 const { Pool } = require("pg");
 
 const credentials = {
-  user: "postgres",
+  user: "adamjohnson",
   host: "localhost",
   database: "datepicker",
   password: "vicfirthh11",

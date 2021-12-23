@@ -1,7 +1,11 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 
-function AddDateButton({ date, submitDate }) {
+interface AddDateButtonProps {
+  date: Date;
+  submitDate: () => void;
+}
+function AddDateButton({ date, submitDate }: AddDateButtonProps) {
   const onClick = () => {
     /////verify date is in the future
     submitDate();

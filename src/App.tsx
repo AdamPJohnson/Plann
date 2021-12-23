@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "react-dates/initialize";
 import axios from "axios";
-import AddDates from "./OrgPages/AddDates.js";
-import LoginForm from "./LoginForm.js";
-import SignUpForm from "./SignUpForm.js";
-import Header from "./Header.js";
-import UserHome from "./UserPages/UserHome.js";
-import OrgHome from "./OrgPages/OrgHome.js";
-import UserProfile from "./UserPages/UserProfile.js";
-import UserDiscover from "./UserPages/UserDiscover.js";
+import AddDates from "./OrgPages/AddDates";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
+import Header from "./Header";
+import UserHome from "./UserPages/UserHome";
+import OrgHome from "./OrgPages/OrgHome";
+import UserProfile from "./UserPages/UserProfile";
+import UserDiscover from "./UserPages/UserDiscover";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import User from "./Interfaces/User";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     axios
@@ -42,7 +43,10 @@ function App() {
       </Route>
       <Route path="/org">
         <Route path="/org/home" element={<OrgHome user={user} />} />
-        <Route path="/org/addDates" element={<AddDates user={user} />} />
+        <Route
+          path="/org/addDates"
+          element={<AddDates userId={user!.id} isOrg={isOrg} user={user} />}
+        />
       </Route>
     </>
   ) : (

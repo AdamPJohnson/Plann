@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import EventListItem from "../EventListItem";
 import axios from "axios";
 import NavButton from "../NavButton";
-function OrgHome({ user }) {
+
+import User from "../Interfaces/User";
+
+interface OrgHomeProps {
+  user: User | null;
+}
+function OrgHome({ user }: OrgHomeProps) {
   const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);
 
-  const getOrgUpcomingEvents = (id) => {
+  const getOrgUpcomingEvents = (id: Number) => {
     axios
       .get(`http://localhost:8080/orgEvents/${id}`)
       .then((data) => {
@@ -15,7 +21,7 @@ function OrgHome({ user }) {
       .catch((e) => console.log(e));
   };
   useEffect(() => {
-    getOrgUpcomingEvents(user.id);
+    getOrgUpcomingEvents(user!.id);
   }, [user]);
 
   const eventList = orgUpcomingEvents.length ? (
@@ -24,7 +30,7 @@ function OrgHome({ user }) {
         <EventListItem
           event={event}
           isOrg={true}
-          userId={user.id}
+          userId={user!.id}
           getUpcomingEvents={getOrgUpcomingEvents}
         />
       );
@@ -43,7 +49,7 @@ function OrgHome({ user }) {
   console.log(user);
   return (
     <div id="userPage">
-      <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>
+      <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
       <div id="upcomingEventsContainer">{eventList}</div>
     </div>

@@ -4,9 +4,11 @@ import EventListItem from "../EventListItem";
 import BottomRightButton from "../BottomRightButton";
 import { FaCalendar } from "react-icons/fa";
 import FullCalendar from "fullcalendar-reactwrapper";
+
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import Modal from "react-modal";
 import NavButton from "../NavButton";
+import User from "../Interfaces/User";
 const events = [
   {
     title: "All Day Event",
@@ -17,11 +19,15 @@ const events = [
     start: "2021-11-07",
   },
 ];
-function UserHome({ user }) {
+
+interface UserHomeProps {
+  user: User | null;
+}
+function UserHome({ user }: UserHomeProps) {
   console.log(user);
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const getUserUpcomingEvents = (id) => {
+  const getUserUpcomingEvents = (id: number) => {
     axios
       .get(`http://localhost:8080/userEvents/${id}`)
       .then((data) => {
@@ -32,15 +38,15 @@ function UserHome({ user }) {
   };
 
   useEffect(() => {
-    getUserUpcomingEvents(user.id);
+    getUserUpcomingEvents(user!.id);
   }, [user]);
   const eventList = userUpcomingEvents.length ? (
-    userUpcomingEvents.map((event) => {
+    userUpcomingEvents.map((event: any) => {
       return (
         <EventListItem
           event={event.json_agg[0]}
           isOrg={false}
-          userId={user.id}
+          userId={user!.id}
           getUpcomingEvents={getUserUpcomingEvents}
         />
       );
@@ -59,7 +65,7 @@ function UserHome({ user }) {
   const customStyles = {
     content: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column" as "column",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: "10px",
@@ -73,7 +79,7 @@ function UserHome({ user }) {
 
   return (
     <div id="userPage">
-      <h3 id="welcome">{`Welcome back, ${user.username}!`}</h3>
+      <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
       <div id="upcomingEventsContainer">{eventList}</div>
       <BottomRightButton
@@ -86,7 +92,7 @@ function UserHome({ user }) {
         onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
-        <FullCalendar
+        {/* <FullCalendar
           id="eventCalendar"
           header={{
             left: "title",
@@ -97,7 +103,7 @@ function UserHome({ user }) {
           navLinks={true} // can click day/week names to navigate views
           eventLimit={true} // allow "more" link when too many events
           events={events}
-        />{" "}
+        />{" "} */}
       </Modal>
     </div>
   );

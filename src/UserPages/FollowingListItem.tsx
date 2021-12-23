@@ -1,8 +1,12 @@
 import React from "react";
 import Button from "react-bootstrap/button";
-function FollowingListItem({ org }) {
+import Org from "../Interfaces/Org";
+interface FollowingListItemProps {
+  org: Org | null;
+}
+function FollowingListItem({ org }: FollowingListItemProps) {
   console.log(org);
-  const { name, email, username, description, zip } = org;
+  const { name, email, username, description, zip } = org!;
   return (
     <div className="followingListItem">
       <span className="followingOrgName">{name}</span>

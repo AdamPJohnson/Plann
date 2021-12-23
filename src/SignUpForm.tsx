@@ -5,9 +5,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material/";
 import Modal from "react-modal";
-///////define modal app element
-function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
-  const [formData, onChange] = useForm({
+import User from "./Interfaces/User";
+interface SignUpFormProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isOrg: boolean;
+  setIsOrg: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+interface FormData {
+  username: string;
+  password: string;
+  orgName: string;
+  email: string;
+  zip: string;
+  description: string;
+}
+///////define modal app elements
+function SignUpForm({
+  setIsLoggedIn,
+  isOrg,
+  setIsOrg,
+  setUser,
+}: SignUpFormProps) {
+  const [formData, onChange] = useForm<FormData>({
     username: "",
     password: "",
     orgName: "",
@@ -18,7 +38,9 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const checkUsernameAvailability = (e) => {
+  const checkUsernameAvailability = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
 
     setModalIsOpen(true);
@@ -45,7 +67,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
     }
     return true;
   };
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (verifyForm()) {
@@ -77,7 +99,7 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
   const customStyles = {
     content: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column" as "column",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: "10px",
@@ -167,7 +189,6 @@ function SignUpForm({ setIsLoggedIn, isOrg, setIsOrg, setUser }) {
         <label htmlFor="description">Description</label>
         <textarea
           onChange={onChange}
-          type="text"
           name="description"
           value={formData.description}
         />

@@ -6,27 +6,44 @@ import AddDateButton from "./AddDateButton";
 import EventListItem from "../EventListItem";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-function AddDates({ user }) {
+import User from "../Interfaces/User";
+
+interface AddDatesProps {
+  user: User | null;
+  userId: number;
+  isOrg: boolean;
+}
+
+interface FormData {
+  eventName: string;
+  description: string;
+}
+function AddDates({ user, userId, isOrg }: AddDatesProps) {
   const url = "http://localhost:8080/orgEvents";
 
   const [date, setDate] = useState(new Date());
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     eventName: "",
     description: "",
   });
-  const onChange = (e) => {
+
+  const onChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const target = e.target as HTMLTextAreaElement | HTMLInputElement;
     let newFormData = { ...formData };
-    newFormData[e.target.name] = e.target.value;
+    (newFormData as any)[target.name] = target.value;
     setFormData(newFormData);
   };
+
   const submitDate = () => {
     const { eventName, description } = formData;
     const payload = {
       date,
       eventName,
       description,
-      id: user.id,
-      zip: user.zip,
+      id: user?.id,
+      zip: user?.zip,
     };
     axios
       .post(url, payload)
@@ -35,7 +52,7 @@ function AddDates({ user }) {
   };
 
   const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);
-  const getOrgUpcomingEvents = (id) => {
+  const getOrgUpcomingEvents = (id: Number) => {
     axios
       .get(`http://localhost:8080/orgEvents/${id}`)
       .then((data) => {
@@ -45,14 +62,21 @@ function AddDates({ user }) {
       .catch((e) => console.log(e));
   };
   useEffect(() => {
-    getOrgUpcomingEvents(user.id);
+    getOrgUpcomingEvents(user!.id);
   }, [user]);
-  const handleDateChange = (input) => {
+  const handleDateChange = (input: Date) => {
     setDate(input);
   };
 
   const datesList = orgUpcomingEvents.map((date) => {
-    return <EventListItem event={date} />;
+    return (
+      <EventListItem
+        event={date}
+        isOrg={isOrg}
+        userId={userId}
+        getUpcomingEvents={getOrgUpcomingEvents}
+      />
+    );
   });
   return (
     <div id="datePickerPage">
@@ -68,7 +92,7 @@ function AddDates({ user }) {
           type="text"
           onChange={onChange}
           name="eventName"
-          value={formData.name}
+          value={formData.eventName}
         />
         <label htmlFor="description">Event Description</label>
         <textarea
