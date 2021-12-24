@@ -23,9 +23,9 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
   };
   const headerUserType = isOrg ? (
     <header className="App-header loggedIn">
-      <NavButton path="/org/home" name="Home" />
-      <NavButton path="/org/profile" name="Profile" />
-      <NavButton path="/org/addDates" name="Add Dates" />
+      <NavButton path="/org/home" name="Home" className="pages" />
+      <NavButton path="/org/profile" name="Profile" className="pages" />
+      <NavButton path="/org/addDates" name="Add Dates" className="pages" />
       <NavButton
         path="/"
         onClick={() => setIsLoggedIn(false)}
@@ -34,10 +34,10 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
     </header>
   ) : (
     <header className="App-header loggedIn">
-      <NavButton path="/user/home" name="Home" />
-      <NavButton path="/user/profile" name="Profile" />
-      <NavButton path="/user/discover" name="Discover" />
-      <NavButton path="/" onClick={logOut} name="Log Out" />
+      <NavButton path="/user/home" name="Home" className="pages" />
+      <NavButton path="/user/profile" name="Profile" className="pages" />
+      <NavButton path="/user/discover" name="Discover" className="pages" />
+      <NavButton path="/" onClick={logOut} name="Log Out" className="pages" />
     </header>
   );
 
@@ -54,6 +54,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
               path="/signup"
               // onClick={() => setIsLoggedIn(true)}
               name="Sign Up"
+              className="loginSignup"
             />
           }
         />
@@ -64,6 +65,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
               path="/signup"
               // onClick={() => setIsLoggedIn(true)}
               name="Sign Up"
+              className="loginSignup"
             />
           }
         />
@@ -74,6 +76,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
               path="/login"
               // onClick={() => setIsLoggedIn(true)}
               name="Log In"
+              className="loginSignup"
             />
           }
         />

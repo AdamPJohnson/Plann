@@ -7,9 +7,16 @@ interface NavButtonProps {
   onClick?: () => void;
   path: string;
   customVariant?: string;
+  className?: string;
 }
 
-function NavButton({ name, onClick, path, customVariant }: NavButtonProps) {
+function NavButton({
+  name,
+  onClick,
+  path,
+  customVariant,
+  className,
+}: NavButtonProps) {
   const variant = customVariant || "outline-light";
   return (
     <Link
@@ -21,7 +28,11 @@ function NavButton({ name, onClick, path, customVariant }: NavButtonProps) {
         justifyContent: "center",
       }}
     >
-      <Button onClick={onClick} variant={variant} className="myNavButton">
+      <Button
+        onClick={onClick}
+        variant={variant}
+        className={`myNavButton ${className}`}
+      >
         {name}
       </Button>
     </Link>
