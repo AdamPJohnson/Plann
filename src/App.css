@@ -64,7 +64,7 @@
   }
   #upcomingEventsContainer {
     width: 60%;
-    height: 30%;
+    height: 50%;
   }
   #profileFollowing {
     width: 50%;
@@ -235,7 +235,9 @@ label {
 #welcome {
   /* float: left; */
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 #upcomingEventsContainer {
   box-shadow: var(--listContainerShadow);
   border-radius: 3px;
@@ -245,6 +247,7 @@ label {
   align-items: center;
   justify-content: flex-start;
   overflow: scroll;
+
   padding: 1em;
 
   border-radius: 10px;

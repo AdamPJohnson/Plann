@@ -9,7 +9,7 @@ import axios from "axios";
 import User from "../Interfaces/User";
 
 interface AddDatesProps {
-  user: User | null;
+  user: User;
   userId: number;
   isOrg: boolean;
 }

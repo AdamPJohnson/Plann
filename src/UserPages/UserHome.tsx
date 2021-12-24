@@ -21,7 +21,7 @@ const events = [
 ];
 
 interface UserHomeProps {
-  user: User | null;
+  user: User;
 }
 function UserHome({ user }: UserHomeProps) {
   console.log(user);
@@ -38,7 +38,7 @@ function UserHome({ user }: UserHomeProps) {
   };
 
   useEffect(() => {
-    getUserUpcomingEvents(user!.id);
+    getUserUpcomingEvents(user.id);
   }, [user]);
   const eventList = userUpcomingEvents.length ? (
     userUpcomingEvents.map((event: any) => {

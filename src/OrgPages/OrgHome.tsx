@@ -6,7 +6,7 @@ import NavButton from "../NavButton";
 import User from "../Interfaces/User";
 
 interface OrgHomeProps {
-  user: User | null;
+  user: User;
 }
 function OrgHome({ user }: OrgHomeProps) {
   const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);

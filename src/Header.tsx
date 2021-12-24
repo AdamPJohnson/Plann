@@ -8,7 +8,7 @@ interface HeaderProps {
   isOrg: boolean;
   isLoggedIn: boolean;
   setIsLoggedIn: (value: React.SetStateAction<boolean>) => void;
-  user: User | null;
+  user: User;
 }
 function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
   const logOut = () => {

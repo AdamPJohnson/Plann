@@ -6,7 +6,7 @@ import axios from "axios";
 import User from "../Interfaces/User";
 
 interface UserProfileProps {
-  user: User | null;
+  user: User;
 }
 function UserProfile({ user }: UserProfileProps) {
   const [nearbyEvents, setNearbyEvents] = useState([]);

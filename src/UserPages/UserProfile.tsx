@@ -6,7 +6,7 @@ import axios from "axios";
 import User from "../Interfaces/User";
 
 interface UserProfileProps {
-  user: User | null;
+  user: User;
 }
 function UserProfile({ user }: UserProfileProps) {
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ function UserProfile({ user }: UserProfileProps) {
         <br />
         <strong id="profileEmail">Email</strong>
         <br />
-        <span id="profileEmail">{user!.email}</span>
+        <span id="profileEmail">{user.email}</span>
         <br />
         <strong id="profileEmail">Following</strong>
         <div id="profileFollowing">{followingList}</div>
