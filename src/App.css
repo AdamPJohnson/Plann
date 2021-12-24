@@ -1,6 +1,10 @@
 :root {
   --listItemShadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   --listContainerShadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  --plannBoxShadow1: 1px 1px 5px rgba(156, 136, 196, 0.4);
+  --plannBoxShadow2: -1px -1px 5px rgba(192, 235, 255, 0.3);
+  --plannBoxShadow1Inset: inset 1px 1px 5px rgba(156, 136, 196, 0.4);
+  --plannBoxShadow2Inset: inset -1px -1px 5px rgba(192, 235, 255, 0.3);
 }
 .App {
   text-align: center;
@@ -37,8 +41,10 @@
 .myNavButton {
   min-height: 5vh;
   margin: 0em 0.2em;
-  font-size: 0.75rem !important;
+  /* font-size: 0.75rem !important; */
   display: flex;
+  align-items: center;
+  justify-self: center;
 }
 
 /*browser*/
@@ -50,9 +56,11 @@
   #loginForm {
     width: 20vw;
     height: 20vw;
+    min-width: 300px;
+    min-height: 300px;
   }
   .myNavButton {
-    width: 30%;
+    width: 10vw;
   }
   .bottomRightButton {
     width: 5vw;
@@ -68,6 +76,10 @@
   }
   #profileFollowing {
     width: 50%;
+  }
+  .removeEventButton {
+    width: 1.5em;
+    height: 1.5em;
   }
 }
 @media screen and (max-width: 600px) {
@@ -95,12 +107,15 @@
   }
   #profileFollowing {
   }
+  .removeEventButton {
+    width: 1em;
+    height: 1em;
+  }
 }
 
 #loginForm {
   border-radius: 10px;
-  box-shadow: 1px 1px 5px rgba(156, 136, 196, 0.4),
-    -1px -1px 5px rgba(192, 235, 255, 0.3);
+  box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,11 +167,13 @@
   overflow: scroll;
   padding: 1em;
   border-radius: 10px;
-  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--plannBoxShadow1Inset), var(--plannBoxShadow2Inset);
 }
 
 .eventListItem {
-  box-shadow: var(--listItemShadow);
+  box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
+
+  /* box-shadow: var(--listItemShadow); */
   border-radius: 5px;
   padding: 0.7em;
   width: 80%;
@@ -207,7 +224,7 @@ label {
 }
 
 #profileFollowing {
-  box-shadow: var(--listContainerShadow);
+  box-shadow: var(--plannBoxShadow1Inset), var(--plannBoxShadow2Inset);
   border-radius: 3px;
 
   height: 30%;
@@ -218,7 +235,7 @@ label {
   overflow: scroll;
 }
 .followingListItem {
-  box-shadow: var(--listItemShadow);
+  box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
 
   min-width: 90%;
   margin: 1em;
@@ -239,7 +256,7 @@ label {
   display: none;
 }
 #upcomingEventsContainer {
-  box-shadow: var(--listContainerShadow);
+  box-shadow: var(--plannBoxShadow1Inset), var(--plannBoxShadow2Inset);
   border-radius: 3px;
 
   display: flex;
@@ -265,10 +282,10 @@ label {
   justify-content: center;
   background: rgba(60, 37, 75, 0.7);
   color: white;
-  width: 1em;
-  height: 1em;
+
   text-align: center;
   line-height: 1em;
+  opacity: 0.7;
 }
 .removeEventButton:hover {
   opacity: 1;
@@ -337,7 +354,7 @@ label {
   justify-content: center;
 }
 .nearbyEventListItem {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
   margin: 1em;
   padding: 1em;
   height: 5vh;
