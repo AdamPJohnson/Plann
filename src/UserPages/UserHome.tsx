@@ -24,7 +24,6 @@ interface UserHomeProps {
   user: User;
 }
 function UserHome({ user }: UserHomeProps) {
-  console.log(user);
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const getUserUpcomingEvents = (id: number) => {
@@ -44,7 +43,7 @@ function UserHome({ user }: UserHomeProps) {
     userUpcomingEvents.map((event: any) => {
       return (
         <EventListItem
-          event={event.json_agg[0]}
+          event={event}
           isOrg={false}
           userId={user!.id}
           getUpcomingEvents={getUserUpcomingEvents}

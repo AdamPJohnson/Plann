@@ -138,10 +138,11 @@ app.post("/signupOrg", (req, res) => {
 
 app.get("/userEvents/:userId", (req, res) => {
   const { userId } = req.params;
+
   event
     .getAllUserEvents(userId)
     .then((data) => {
-      res.status(200).send(data.rows);
+      res.status(200).send(data.rows.map((d) => d.json_agg[0]));
     })
     .catch((e) => {
       console.log("failed to fetch user events: ", e);

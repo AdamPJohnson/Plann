@@ -12,6 +12,8 @@ interface UserProfileProps {
 function UserProfile({ user }: UserProfileProps) {
   const [nearbyEvents, setNearbyEvents] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
+  const [following, setFollowing] = useState([]);
+
   const getNearByEvents = (zip: string) => {
     axios
       .get(`http://localhost:8080/nearbyEvents/${zip}`)
@@ -20,10 +22,22 @@ function UserProfile({ user }: UserProfileProps) {
   };
   useEffect(() => {
     getNearByEvents(user!.zip);
+    const { id } = user!;
+    axios
+      .get(`http://localhost:8080/userEvents/${id}`)
+      .then((events) => setFollowing(events.data))
+      .catch((e) => console.log(e));
   }, [user]);
   const nearbyEventList = nearbyEvents.map((event: Event) => {
     if (event.type === selectedType || selectedType === "all")
-      return <NearbyEventListItem user={user} event={event} />;
+      return (
+        <NearbyEventListItem
+          setFollowing={setFollowing}
+          following={following}
+          user={user}
+          event={event}
+        />
+      );
   });
 
   const handleSelect = (e: React.ChangeEvent) => {

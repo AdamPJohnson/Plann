@@ -6,20 +6,38 @@ import axios from "axios";
 interface NearbyEventListItemProps {
   event: Event;
   user: User;
+  following: Event[];
+  setFollowing: React.Dispatch<React.SetStateAction<never[]>>;
 }
-function NearbyEventListItem({ event, user }: NearbyEventListItemProps) {
+function NearbyEventListItem({
+  event,
+  user,
+  following,
+  setFollowing,
+}: NearbyEventListItemProps) {
+  const getEvents = () => {
+    axios
+      .get(`http://localhost:8080/userEvents/${user.id}`)
+      .then((d) => setFollowing(d.data));
+  };
   const followEvent = () => {
     console.log(event.id);
     axios
       .patch(`http://localhost:8080/userEvents/${user.id}/${event.id}`)
-      .then((d) => console.log(d))
+      .then((d) => getEvents())
+      .catch((e) => console.log(e));
+  };
+  const unfollowEvent = () => {
+    axios
+      .delete(`http://localhost:8080/userEvents/${user.id}/${event.id}`)
+      .then((d) => getEvents())
       .catch((e) => console.log(e));
   };
 
-  const unfollowEvent = () => {};
-
   const date = new Date(parseInt(event.date)).toLocaleString();
-  const followed = false;
+  const followed = following.some((e: Event) => e.id === event.id);
+  console.log(following);
+  console.log(followed);
   const actionButton = followed ? (
     <Button
       onClick={unfollowEvent}
