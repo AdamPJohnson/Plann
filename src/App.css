@@ -85,6 +85,10 @@
     width: 1.5em;
     height: 1.5em;
   }
+  #nearbyEventList {
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 200px;
+  }
 }
 @media screen and (max-width: 600px) {
   .loginSignup {
@@ -377,13 +381,12 @@ label {
 }
 #nearbyEventList {
   display: grid;
-  column-width: 30vw;
+
   /* flex-direction: row; */
   /* flex-wrap: wrap; */
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
   width: 80%;
   height: 80%;
-  overflow: scroll;
-  /* border: 1px solid black; */
+  overflow-y: scroll;
 }
