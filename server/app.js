@@ -149,6 +149,18 @@ app.get("/userEvents/:userId", (req, res) => {
     });
 });
 
+app.patch("/userEvents/:userId/:id", (req, res) => {
+  const { userId, id } = req.params;
+  event
+    .follow(id, userId)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(500).send(e);
+    });
+});
 app.get("/orgEvents/:orgId", (req, res) => {
   const { orgId } = req.params;
   event

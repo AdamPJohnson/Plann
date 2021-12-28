@@ -1,18 +1,41 @@
 import React from "react";
 import Button from "react-bootstrap/button";
 import Event from "../Interfaces/Event";
+import User from "../Interfaces/User";
+import axios from "axios";
 interface NearbyEventListItemProps {
   event: Event;
+  user: User;
 }
-function NearbyEventListItem({ event }: NearbyEventListItemProps) {
+function NearbyEventListItem({ event, user }: NearbyEventListItemProps) {
+  const followEvent = () => {
+    console.log(event.id);
+    axios
+      .patch(`http://localhost:8080/userEvents/${user.id}/${event.id}`)
+      .then((d) => console.log(d))
+      .catch((e) => console.log(e));
+  };
+
+  const unfollowEvent = () => {};
+
   const date = new Date(parseInt(event.date)).toLocaleString();
   const followed = false;
   const actionButton = followed ? (
-    <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+    <Button
+      onClick={unfollowEvent}
+      className="nearbyEventButton"
+      variant="outline-dark"
+      size="sm"
+    >
       Unfollow
     </Button>
   ) : (
-    <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+    <Button
+      onClick={followEvent}
+      className="nearbyEventButton"
+      variant="outline-dark"
+      size="sm"
+    >
       Follow
     </Button>
   );

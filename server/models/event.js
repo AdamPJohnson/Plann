@@ -21,6 +21,11 @@ module.exports = {
     DELETE from events WHERE org_id='${orgId}' AND id='${id}'
 `);
   },
+  follow: async (id, userId) => {
+    return await pool.query(`
+    INSERT INTO eventFollows(event_id, user_id) VALUES(${id}, ${userId})
+  `);
+  },
   unfollow: async (id, userId) => {
     return await pool.query(`
     DELETE from eventFollows WHERE user_id=${userId} AND event_id=${id}

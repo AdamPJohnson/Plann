@@ -23,7 +23,7 @@ function UserProfile({ user }: UserProfileProps) {
   }, [user]);
   const nearbyEventList = nearbyEvents.map((event: Event) => {
     if (event.type === selectedType || selectedType === "all")
-      return <NearbyEventListItem event={event} />;
+      return <NearbyEventListItem user={user} event={event} />;
   });
 
   const handleSelect = (e: React.ChangeEvent) => {
