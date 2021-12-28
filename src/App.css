@@ -376,10 +376,11 @@ label {
   margin: 0.1em;
 }
 #nearbyEventList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  column-width: 30vw;
+  /* flex-direction: row; */
+  /* flex-wrap: wrap; */
+  /* align-items: center; */
   justify-content: center;
   width: 80%;
   height: 80%;

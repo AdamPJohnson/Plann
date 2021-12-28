@@ -42,6 +42,7 @@ CREATE TABLE events (
   description VARCHAR(1000),
   org_id INT NOT NULL,
   zip INT NOT NULL,
+  type VARCHAR(20),
   FOREIGN KEY (org_id) REFERENCES orgs(id) ON DELETE CASCADE
 );
 CREATE TABLE eventFollows (
@@ -118,17 +119,17 @@ VALUES (3, 3),
   (3, 2),
   (2, 3),
   (2, 2),
-  (4,1),
-  (4,2);
-INSERT INTO events(name, date, org_id, zip)
-VALUES ('Big Test Party', 1605931, 1, 94606),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607),
-  ('Other Test Party', 1605931, 1, 94607);
+  (4, 1),
+  (4, 2);
+INSERT INTO events(name, date, org_id, zip, type)
+VALUES ('Big Test Party', 1605931, 1, 94606, 'food'),
+  ('Other Test Party', 1605931, 1, 94606, 'food'),
+  ('Other Test Party', 1605931, 1, 94606, 'food'),
+  ('Other Test Party', 1605931, 1, 94606, 'food'),
+  ('Other Test Party', 1605931, 1, 94606, 'food'),
+  ('Other Test Party', 1605931, 1, 94606, 'music'),
+  ('Other Test Party', 1605931, 1, 94607, 'music'),
+  ('Other Test Party', 1605931, 1, 94607, 'music');
 INSERT INTO eventFollows(user_id, event_id)
 VALUES (1, 1),
   (4, 1),
