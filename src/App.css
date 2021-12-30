@@ -70,7 +70,7 @@
     width: 5vw;
     height: 5vw;
   }
-  .nearbyEventListItem {
+  .nearbyListItem {
     max-width: 80%;
     min-width: 80%;
     /* height: 5vh; */
@@ -111,7 +111,7 @@
     width: 12vw;
     height: 12vw;
   }
-  .nearbyEventListItem {
+  .nearbyListItem {
     max-width: 60vw;
     min-width: 60vw;
   }
@@ -370,7 +370,7 @@ label {
   align-items: center;
   justify-content: center;
 }
-.nearbyEventListItem {
+.nearbyListItem {
   box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
   margin: 1em;
   padding: 1em;
@@ -379,6 +379,11 @@ label {
   box-sizing: content-box;
   line-height: 0.6em;
 }
+
+.nearbyOrg {
+  height: 4em;
+}
+
 .nearbyEventDate {
   font-size: 0.5em;
 }
@@ -402,4 +407,32 @@ label {
   box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2);
   padding: 0.2em;
   border-radius: 5px;
+}
+
+#discoverSelectButtons {
+  margin-bottom: 1em;
+}
+#nearbyEventsButton {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+#nearbyOrgsButton {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: none;
+}
+
+.nearbyNavLink {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  padding: 0.5em;
+  border-radius: 3px;
+  background-color: white;
+  transition: color 200ms, background-color 200ms;
+}
+
+.nearbyNavLink:hover {
+  background-color: black;
+  color: white;
 }

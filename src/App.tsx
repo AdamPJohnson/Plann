@@ -39,7 +39,10 @@ function App() {
       <Route path="/user">
         <Route path="/user/home" element={<UserHome user={user!} />} />
         <Route path="/user/profile" element={<UserProfile user={user!} />} />
-        <Route path="/user/discover" element={<UserDiscover user={user!} />} />
+        <Route
+          path="/user/discover/*"
+          element={<UserDiscover user={user!} />}
+        />
       </Route>
       <Route path="/org">
         <Route path="/org/home" element={<OrgHome user={user!} />} />

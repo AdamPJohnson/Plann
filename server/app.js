@@ -8,7 +8,7 @@ app.use(cookieParser());
 const sha256 = require("js-sha256");
 var zipcodes = require("zipcodes");
 
-const { signup, login, event, session, user } = require("./models");
+const { signup, login, event, session, user, org } = require("./models");
 /////try/catch here?
 
 app.get("/session", async (req, res) => {
@@ -213,13 +213,30 @@ app.delete("/orgEvents/:orgId/:id", (req, res) => {
 
 app.get("/nearbyEvents/:zip/", async (req, res) => {
   const { zip } = req.params;
-  console.log({ zip });
+
   const distance = 5;
   const nearby = zipcodes.radius(zip, distance);
   let nearbyString = "(";
   nearby.forEach((zip) => (nearbyString += `'${zip}', `));
   nearbyString = nearbyString.slice(0, -2) + ")";
   event
+    .getNearby(nearbyString)
+    .then((d) => res.status(200).send(d.rows))
+    .catch((e) => {
+      res.status(500).send();
+      console.log(e);
+    });
+});
+
+app.get("/nearbyOrgs/:zip/", async (req, res) => {
+  const { zip } = req.params;
+
+  const distance = 5;
+  const nearby = zipcodes.radius(zip, distance);
+  let nearbyString = "(";
+  nearby.forEach((zip) => (nearbyString += `'${zip}', `));
+  nearbyString = nearbyString.slice(0, -2) + ")";
+  org
     .getNearby(nearbyString)
     .then((d) => res.status(200).send(d.rows))
     .catch((e) => {

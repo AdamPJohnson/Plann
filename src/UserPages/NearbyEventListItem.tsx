@@ -36,8 +36,7 @@ function NearbyEventListItem({
 
   const date = new Date(parseInt(event.date)).toLocaleString();
   const followed = following.some((e: Event) => e.id === event.id);
-  console.log(following);
-  console.log(followed);
+
   const actionButton = followed ? (
     <Button
       onClick={unfollowEvent}
@@ -58,7 +57,7 @@ function NearbyEventListItem({
     </Button>
   );
   return (
-    <div className="nearbyEventListItem">
+    <div className="nearbyListItem">
       <span>{event.name}</span>
       <br />
       <span className="nearbyEventDate">{date}</span>
