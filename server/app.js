@@ -49,6 +49,7 @@ app.patch("/logout", async (req, res) => {
 });
 
 app.post("/orgEvents", (req, res) => {
+  console.log(req.body);
   event
     .add(req.body)
     .then((d) => {

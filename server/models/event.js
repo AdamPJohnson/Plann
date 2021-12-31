@@ -40,7 +40,7 @@ module.exports = {
   add: async (body) => {
     const { eventName, description, id, zip } = body;
     let { date } = body;
-    date = new Date(date).getTime() / 1000;
+    date = new Date(date).getTime();
     return await pool.query(`
      INSERT INTO events (name, date, description, org_id, zip) VALUES('${eventName}', ${date}, '${description}','${id}', ${zip})
     `);

@@ -94,7 +94,7 @@
     width: 80%;
   }
   #currentDatesContainer {
-    height: 60%;
+    height: 50%;
     width: 50%;
   }
 }
@@ -216,7 +216,7 @@
 
 input,
 textArea {
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--plannBoxShadow1Inset), var(--plannBoxShadow2Inset);
   border-width: 0px;
   border-radius: 3px;
   margin: 0.2em !important;
@@ -454,4 +454,18 @@ label {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#calendarContainer {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc {
+  width: 80%;
+  height: 80%;
 }

@@ -3,22 +3,16 @@ import React, { useState, useEffect } from "react";
 import EventListItem from "../EventListItem";
 import BottomRightButton from "../BottomRightButton";
 import { FaCalendar } from "react-icons/fa";
-import FullCalendar from "fullcalendar-reactwrapper";
+import FullCalendar, { formatDate } from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import Modal from "react-modal";
 import NavButton from "../NavButton";
 import User from "../Interfaces/User";
-const events = [
-  {
-    title: "All Day Event",
-    start: "2021-11-01",
-  },
-  {
-    title: "Event",
-    start: "2021-11-07",
-  },
-];
+import Event from "../Interfaces/Event";
 
 interface UserHomeProps {
   user: User;
@@ -38,8 +32,21 @@ function UserHome({ user }: UserHomeProps) {
   useEffect(() => {
     getUserUpcomingEvents(user.id);
   }, [user]);
+
+  let formattedEvents = userUpcomingEvents.map((event: Event) => {
+    const startDate = new Date(event.date).toISOString();
+
+    console.log(startDate);
+    return {
+      title: event.name,
+      start: startDate,
+      allDay: false,
+    };
+  });
+
   const eventList = userUpcomingEvents.length ? (
     userUpcomingEvents.map((event: any) => {
+      console.log(event);
       return (
         <EventListItem
           event={event}
@@ -74,7 +81,16 @@ function UserHome({ user }: UserHomeProps) {
       transform: "translateX(-50%)",
     },
   };
-
+  const renderEventContent = (eventInfo: any) => {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b> <i>{eventInfo.event.title}</i>
+      </>
+    );
+  };
+  const handleEventClick = (e: any) => {
+    console.log(e.event._def);
+  };
   return (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
@@ -90,18 +106,32 @@ function UserHome({ user }: UserHomeProps) {
         onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
-        {/* <FullCalendar
-          id="eventCalendar"
-          header={{
-            left: "title",
-            center: "prev,next today myCustomButton",
-            right: "month,basicWeek",
-          }}
-          defaultDate={new Date()}
-          navLinks={true} // can click day/week names to navigate views
-          eventLimit={true} // allow "more" link when too many events
-          events={events}
-        />{" "} */}
+        <div id="calendarContainer">
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
+            }}
+            initialView="dayGridMonth"
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            // weekends={this.state.weekendsVisible}
+            initialEvents={formattedEvents} // alternatively, use the `events` setting to fetch from a feed
+            // select={this.handleDateSelect}
+            eventContent={renderEventContent} // custom render function
+            eventClick={handleEventClick}
+            // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+            /* you can update a remote database when these fire:
+          eventAdd={function(){}}
+          eventChange={function(){}}
+          eventRemove={function(){}}
+          */
+          />
+        </div>
       </Modal>
     </div>
   );
