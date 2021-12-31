@@ -15,7 +15,6 @@ function OrgHome({ user }: OrgHomeProps) {
     axios
       .get(`http://localhost:8080/orgEvents/${id}`)
       .then((data) => {
-        console.log("fetched events: ", data);
         setOrgUpcomingEvents(data.data);
       })
       .catch((e) => console.log(e));
@@ -36,7 +35,7 @@ function OrgHome({ user }: OrgHomeProps) {
       );
     })
   ) : (
-    <>
+    <div className="emptyFollowingContainer">
       <span>You have no upcoming events. Click "Add Dates" to add some!</span>
       <br />
       <NavButton
@@ -44,7 +43,7 @@ function OrgHome({ user }: OrgHomeProps) {
         path="/org/addDates"
         name="Add Dates"
       />
-    </>
+    </div>
   );
   console.log(user);
   return (

@@ -22,14 +22,13 @@ function App() {
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
       .then((result) => {
-        console.log({ result });
         if (result.data) {
           console.log(result.data);
-          console.log("result.data");
           setUser(result.data);
           setIsLoggedIn(true);
         }
-      });
+      })
+      .catch((e) => console.log(e));
   }, []);
   const home = isOrg ? <OrgHome user={user!} /> : <UserHome user={user!} />;
   const main = isLoggedIn ? (

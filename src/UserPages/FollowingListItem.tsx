@@ -6,7 +6,6 @@ interface FollowingListItemProps {
   unfollowOrg: (org: Org) => void;
 }
 function FollowingListItem({ org, unfollowOrg }: FollowingListItemProps) {
-  console.log(org);
   const { name, email, username, description, zip } = org!;
   return (
     <div className="followingListItem">

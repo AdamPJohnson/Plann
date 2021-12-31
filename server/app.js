@@ -30,8 +30,7 @@ app.get("/session", async (req, res) => {
     }
   }
 });
-
-app.patch("/session/", async (req, res) => {
+app.patch("/session", async (req, res) => {
   const { id } = req.body;
   const hash = req.cookies.eventSession;
   session
@@ -39,7 +38,7 @@ app.patch("/session/", async (req, res) => {
     .then((d) => console.log(d))
     .catch((e) => console.log(e));
 });
-app.patch("/logout/", async (req, res) => {
+app.patch("/logout", async (req, res) => {
   const { id } = req.body;
   const hash = req.cookies.eventSession;
 
@@ -48,6 +47,7 @@ app.patch("/logout/", async (req, res) => {
     .then((d) => console.log(d))
     .catch((e) => console.log(e));
 });
+
 app.post("/orgEvents", (req, res) => {
   event
     .add(req.body)

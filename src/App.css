@@ -90,6 +90,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: repeat(5vh);
   }
+  #currentDatesList {
+    width: 80%;
+  }
+  #currentDatesContainer {
+    height: 60%;
+    width: 50%;
+  }
 }
 
 /* mobile */
@@ -172,15 +179,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50%;
 }
 #currentDatesList {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   height: 60%;
-  width: 80%;
+
   overflow: scroll;
   padding: 1em;
   border-radius: 10px;
@@ -392,9 +398,6 @@ label {
 }
 #nearbyEventList {
   display: grid;
-
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: center;
   width: 80%;

@@ -56,7 +56,6 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
     axios
       .get(`http://localhost:8080/orgEvents/${id}`)
       .then((data) => {
-        console.log("fetched events: ", data);
         setOrgUpcomingEvents(data.data);
       })
       .catch((e) => console.log(e));

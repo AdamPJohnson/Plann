@@ -30,7 +30,6 @@ function UserHome({ user }: UserHomeProps) {
     axios
       .get(`http://localhost:8080/userEvents/${id}`)
       .then((data) => {
-        console.log("fetched events: ", data);
         setUserUpcomingEvents(data.data);
       })
       .catch((e) => console.log(e));

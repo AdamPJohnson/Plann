@@ -30,6 +30,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
         path="/"
         onClick={() => setIsLoggedIn(false)}
         name="Log Out"
+        className="pages"
       />{" "}
     </header>
   ) : (
