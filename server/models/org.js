@@ -3,7 +3,7 @@ const pool = require("../postgresConfig");
 module.exports = {
   getNearby: async (nearbyString) => {
     return await pool.query(`
-    SELECT * from orgs WHERE zip in ${nearbyString}
+    SELECT * from users WHERE type='org'  AND zip in ${nearbyString}
 `);
   },
   follow: async (userId, orgId) => {

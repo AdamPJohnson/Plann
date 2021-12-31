@@ -5,7 +5,7 @@ module.exports = {
     const { username, password, email, zip } = input;
 
     return await pool.query(
-      `INSERT INTO users (username, password, email, zip) values ('${username}','${password}','${email}','${zip}') RETURNING *;`
+      `INSERT INTO users (username, password, email, zip, type) values ('${username}','${password}','${email}','${zip}', 'user') RETURNING *;`
     );
     ////// THIS NEEDS TO BE FINISHED
   },
@@ -14,7 +14,7 @@ module.exports = {
     const { orgName, username, password, email, zip, description } = input;
 
     return await pool.query(
-      `INSERT INTO orgs (name, username, password, email, zip, description) values ('${orgName}','${username}','${password}','${email}','${zip}','${description}') RETURNING *;`
+      `INSERT INTO users (name, username, password, email, zip, description, type) values ('${orgName}','${username}','${password}','${email}','${zip}','${description}', 'org') RETURNING *;`
     );
     ////// THIS NEEDS TO BE FINISHED
   },
