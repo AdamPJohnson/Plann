@@ -5,6 +5,7 @@ import FollowingListItem from "./FollowingListItem";
 import axios from "axios";
 import User from "../Interfaces/User";
 import Org from "../Interfaces/Org";
+import NavButton from "../NavButton";
 
 interface UserProfileProps {
   user: User;
@@ -31,9 +32,23 @@ function UserProfile({ user }: UserProfileProps) {
       .catch((e) => console.log(e));
   };
 
-  const followingList = following.map((org) => {
-    return <FollowingListItem org={org} unfollowOrg={unfollowOrg} />;
-  });
+  const followingList = following.length ? (
+    following.map((org) => {
+      return <FollowingListItem org={org} unfollowOrg={unfollowOrg} />;
+    })
+  ) : (
+    <div className="emptyFollowingContainer">
+      <span>
+        You don't follow any organizations. Click "Discover" to add some!
+      </span>
+      <br />
+      <NavButton
+        customVariant="outline-dark"
+        path="/user/discover/orgs"
+        name="Discover"
+      />
+    </div>
+  );
 
   return (
     <div id="userPage">

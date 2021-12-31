@@ -16,7 +16,7 @@ function NearbyOrgListItem({
   setFollowing,
 }: NearbyOrgListItemProps) {
   const followed = following.some((o: Org) => o.id === org.id);
-  console.log(following);
+
   const getOrgs = () => {
     axios
       .get(`http://localhost:8080/orgFollows/${user.id}`)
@@ -35,7 +35,7 @@ function NearbyOrgListItem({
       .then((d) => getOrgs())
       .catch((e) => console.log(e));
   };
-  console.log(followed);
+
   const actionButton = followed ? (
     <Button
       onClick={unfollowOrg}
