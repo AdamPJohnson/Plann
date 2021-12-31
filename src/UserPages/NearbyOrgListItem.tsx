@@ -15,7 +15,7 @@ function NearbyOrgListItem({
   following,
   setFollowing,
 }: NearbyOrgListItemProps) {
-  const followed = following.some((o: Org) => o.username === org.username);
+  const followed = following.some((o: Org) => o.id === org.id);
   console.log(following);
   const getOrgs = () => {
     axios

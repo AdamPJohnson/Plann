@@ -6,7 +6,7 @@ module.exports = {
   },
   getOrgFollows: (id) => {
     return pool.query(
-      `SELECT name, username, email, description, zip FROM orgs WHERE id in (SELECT org_id FROM orgFollows where user_id=${id})`
+      `SELECT * FROM orgs WHERE id in (SELECT org_id FROM orgFollows where user_id=${id})`
     );
   },
 };
