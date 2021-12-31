@@ -378,10 +378,10 @@ label {
   border-radius: 5px;
   box-sizing: content-box;
   line-height: 0.6em;
-}
-
-.nearbyOrg {
-  height: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nearbyEventDate {
@@ -412,6 +412,10 @@ label {
 #discoverSelectButtons {
   margin-bottom: 1em;
 }
+.activeButton {
+  color: #fff !important;
+  background-color: #212529 !important;
+}
 #nearbyEventsButton {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -420,6 +424,10 @@ label {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border-left: none;
+}
+
+.nearbyOrgDescription {
+  font-size: 0.6em;
 }
 
 .nearbyNavLink {
@@ -435,4 +443,12 @@ label {
 .nearbyNavLink:hover {
   background-color: black;
   color: white;
+}
+
+.emptyFollowingContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

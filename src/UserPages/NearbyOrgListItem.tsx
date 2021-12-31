@@ -15,31 +15,32 @@ function NearbyOrgListItem({
   following,
   setFollowing,
 }: NearbyOrgListItemProps) {
-  const followed = following.some((o: Org) => o.id === org.id);
-
+  const followed = following.some((o: Org) => o.username === org.username);
+  console.log(following);
   const getOrgs = () => {
-    // axios
-    //   .get(`http://localhost:8080/userEvents/${user.id}`)
-    //   .then((d) => setFollowing(d.data));
+    axios
+      .get(`http://localhost:8080/orgFollows/${user.id}`)
+      .then((d) => setFollowing(d.data))
+      .catch((e) => console.log(e));
   };
   const followOrg = () => {
-    // axios
-    //   .patch(`http://localhost:8080/userEvents/${user.id}/${org.id}`)
-    //   .then((d) => getOrgs())
-    //   .catch((e) => console.log(e));
+    axios
+      .patch(`http://localhost:8080/orgFollows/${user.id}/${org.id}`)
+      .then((d) => getOrgs())
+      .catch((e) => console.log(e));
   };
   const unfollowOrg = () => {
-    // axios
-    //   .delete(`http://localhost:8080/userEvents/${user.id}/${org.id}`)
-    //   .then((d) => getOrgs())
-    //   .catch((e) => console.log(e));
+    axios
+      .delete(`http://localhost:8080/orgFollows/${user.id}/${org.id}`)
+      .then((d) => getOrgs())
+      .catch((e) => console.log(e));
   };
-
+  console.log(followed);
   const actionButton = followed ? (
     <Button
       onClick={unfollowOrg}
       className="nearbyEventButton"
-      variant="outline-dark"
+      variant="dark"
       size="sm"
     >
       Unfollow
@@ -57,14 +58,16 @@ function NearbyOrgListItem({
 
   return (
     <div className="nearbyListItem nearbyOrg">
-      <span>{org.name}</span>
+      <strong>{org.name}</strong>
       <br />
       <span className="nearbyOrgDescription">{org.description}</span>
       <br />
-      <Button className="nearbyEventButton" variant="outline-dark" size="sm">
-        Details
-      </Button>
-      {actionButton}
+      <div>
+        <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+          Details
+        </Button>
+        {actionButton}
+      </div>
     </div>
   );
 }

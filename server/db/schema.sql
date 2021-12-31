@@ -1,4 +1,4 @@
-/* psql -U adamjohnson < server/db/schema.sql  THIS ONE!!!*/
+/* psql -U adamjohnson < server/db/schema.sql  */
 DROP DATABASE IF EXISTS datepicker;
 CREATE DATABASE datepicker;
 \c datepicker;

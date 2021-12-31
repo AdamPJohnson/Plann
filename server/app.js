@@ -138,7 +138,6 @@ app.post("/signupOrg", (req, res) => {
 
 app.get("/userEvents/:userId", (req, res) => {
   const { userId } = req.params;
-
   event
     .getAllUserEvents(userId)
     .then((data) => {
@@ -184,6 +183,32 @@ app.get("/orgFollows/:userId", (req, res) => {
     .catch((e) => {
       console.log("failed to fetch user events: ", e);
       res.status(404).send([]);
+    });
+});
+
+app.patch("/orgFollows/:userId/:orgId", (req, res) => {
+  const { userId, orgId } = req.params;
+  org
+    .follow(userId, orgId)
+    .then((data) => {
+      res.status(200).send();
+    })
+    .catch((e) => {
+      console.log(e);
+      console.log("failed to follow org: ", e);
+      res.status(404).send([]);
+    });
+});
+app.delete("/orgFollows/:userId/:orgId", (req, res) => {
+  const { userId, orgId } = req.params;
+  org
+    .unfollow(userId, orgId)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((e) => {
+      console.log("failed to unfollow org: ", e);
+      res.status(500).send([]);
     });
 });
 

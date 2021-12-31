@@ -41,7 +41,7 @@ function NearbyEventListItem({
     <Button
       onClick={unfollowEvent}
       className="nearbyEventButton"
-      variant="outline-dark"
+      variant="dark"
       size="sm"
     >
       Unfollow
@@ -56,16 +56,19 @@ function NearbyEventListItem({
       Follow
     </Button>
   );
+
   return (
     <div className="nearbyListItem">
-      <span>{event.name}</span>
+      <strong>{event.name}</strong>
       <br />
       <span className="nearbyEventDate">{date}</span>
       <br />
-      <Button className="nearbyEventButton" variant="outline-dark" size="sm">
-        Details
-      </Button>
-      {actionButton}
+      <div>
+        <Button className="nearbyEventButton" variant="outline-dark" size="sm">
+          Details
+        </Button>
+        {actionButton}
+      </div>
     </div>
   );
 }

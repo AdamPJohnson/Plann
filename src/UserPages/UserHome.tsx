@@ -51,7 +51,7 @@ function UserHome({ user }: UserHomeProps) {
       );
     })
   ) : (
-    <>
+    <div className="emptyFollowingContainer">
       <span>You have no upcoming events. Click "Discover" to add some!</span>
       <br />
       <NavButton
@@ -59,7 +59,7 @@ function UserHome({ user }: UserHomeProps) {
         path="/user/discover"
         name="Discover"
       />
-    </>
+    </div>
   );
   const customStyles = {
     content: {

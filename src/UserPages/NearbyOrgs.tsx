@@ -21,10 +21,10 @@ function NearbyOrgs({ user }: NearbyOrgsProps) {
   useEffect(() => {
     getNearByEvents(user!.zip);
     const { id } = user!;
-    // axios
-    //   .get(`http://localhost:8080/userEvents/${id}`)
-    //   .then((events) => setFollowing(events.data))
-    //   .catch((e) => console.log(e));
+    axios
+      .get(`http://localhost:8080/orgFollows/${id}`)
+      .then((orgs) => setFollowing(orgs.data))
+      .catch((e) => console.log(e));
   }, [user]);
 
   const handleSelect = (e: React.ChangeEvent) => {

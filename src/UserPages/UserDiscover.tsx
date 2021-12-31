@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useState } from "react";
+import React from "react";
 import BottomRightButton from "../BottomRightButton";
 import User from "../Interfaces/User";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -11,10 +11,15 @@ interface UserDiscoverProps {
 }
 function UserDiscover({ user }: UserDiscoverProps) {
   const navigate = useNavigate();
-
   const onNavigate = (path: string) => {
     navigate(path);
   };
+  const eventsActive = !window.location.href.endsWith("orgs")
+    ? "activeButton"
+    : "";
+  const orgsActive = window.location.href.endsWith("orgs")
+    ? "activeButton"
+    : "";
 
   return (
     <div id="userPage">
@@ -23,6 +28,7 @@ function UserDiscover({ user }: UserDiscoverProps) {
           onClick={() => onNavigate("")}
           variant="outline-dark"
           id="nearbyEventsButton"
+          className={eventsActive}
         >
           Events
         </Button>
@@ -30,6 +36,7 @@ function UserDiscover({ user }: UserDiscoverProps) {
           onClick={() => onNavigate("orgs")}
           variant="outline-dark"
           id="nearbyOrgsButton"
+          className={orgsActive}
         >
           Organizations
         </Button>
