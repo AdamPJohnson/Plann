@@ -29,6 +29,7 @@ function UserDiscover({ user }: UserDiscoverProps) {
           variant="outline-dark"
           id="nearbyEventsButton"
           className={eventsActive}
+          size="lg"
         >
           Events
         </Button>
@@ -37,6 +38,7 @@ function UserDiscover({ user }: UserDiscoverProps) {
           variant="outline-dark"
           id="nearbyOrgsButton"
           className={orgsActive}
+          size="lg"
         >
           Organizations
         </Button>
