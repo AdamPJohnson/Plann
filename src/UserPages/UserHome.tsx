@@ -13,13 +13,20 @@ import Modal from "react-modal";
 import NavButton from "../NavButton";
 import User from "../Interfaces/User";
 import Event from "../Interfaces/Event";
-
+import Overlay from "react-bootstrap/Overlay";
+import Tooltip from "react-bootstrap/Tooltip";
 interface UserHomeProps {
   user: User;
 }
 function UserHome({ user }: UserHomeProps) {
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [overlayText, setOverlayText] = useState({
+    title: "",
+    description: "",
+  });
+  const [overlayTarget, setOverlayTarget] = useState(null);
   const getUserUpcomingEvents = (id: number) => {
     axios
       .get(`http://localhost:8080/userEvents/${id}`)
@@ -36,7 +43,6 @@ function UserHome({ user }: UserHomeProps) {
   let formattedEvents = userUpcomingEvents.map((event: Event) => {
     const startDate = new Date(event.date).toISOString();
 
-    console.log(startDate);
     return {
       title: event.name,
       start: startDate,
@@ -75,7 +81,6 @@ function UserHome({ user }: UserHomeProps) {
       justifyContent: "center",
       borderRadius: "10px",
       border: "none",
-      boxShadow: "1px 1px 15px rgba(0,0,0,0.3)",
       width: "90%",
       left: "50%",
       transform: "translateX(-50%)",
@@ -89,8 +94,23 @@ function UserHome({ user }: UserHomeProps) {
     );
   };
   const handleEventClick = (e: any) => {
-    console.log(e.event._def);
+    const eventDetails: Event = userUpcomingEvents.find(
+      (event: Event) => event.name === e.event._def.title
+    )!;
+
+    setOverlayTarget(e.el);
+
+    setOverlayText({
+      title: eventDetails.name,
+      description: eventDetails.description,
+    });
+    setShowOverlay(!showOverlay);
   };
+
+  const handleClose = () => {
+    setShowOverlay(false);
+  };
+
   return (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
@@ -110,13 +130,13 @@ function UserHome({ user }: UserHomeProps) {
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
-              left: "prev,next today",
+              left: "prev,today,next",
               center: "title",
               right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
             initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
+            // editable={true}
+            // selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
             initialEvents={formattedEvents} // alternatively, use the `events` setting to fetch from a feed
@@ -131,6 +151,19 @@ function UserHome({ user }: UserHomeProps) {
           */
           />
         </div>
+        <Overlay
+          target={overlayTarget}
+          show={showOverlay}
+          onHide={handleClose}
+          placement="bottom"
+        >
+          <Tooltip style={{ color: "white" }}>
+            <div id="tooltipContents">
+              <strong id="tooltipTitle">{overlayText.title}</strong>
+              <div id="tooltipDetails">{overlayText.description}</div>
+            </div>
+          </Tooltip>
+        </Overlay>
       </Modal>
     </div>
   );

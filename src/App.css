@@ -385,6 +385,15 @@ label {
 .fc-daygrid {
   width: 100%;
 }
+.fc-event {
+  background-color: #492d5c !important;
+  color: whitesmoke !important;
+  cursor: pointer;
+}
+.fc-event:hover {
+  color: #492d5c !important;
+  background-color: whitesmoke !important;
+}
 
 #eventCalendar {
   width: 100%;
@@ -511,4 +520,13 @@ label {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.tooltip-inner {
+  background-color: #492d5c !important;
+  padding: 1em !important;
+}
+
+#tooltipTitle {
+  text-decoration: underline;
 }
