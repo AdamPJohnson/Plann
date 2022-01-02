@@ -143,6 +143,11 @@
   #calendarContainer {
     width: 100%;
   }
+
+  #calendarModal {
+    width: 95% !important;
+    height: 90% !important;
+  }
 }
 
 #loginForm {
@@ -339,6 +344,8 @@ label {
   align-items: center;
 }
 .bottomRightButton:hover {
+  color: #643d7e;
+  background: whitesmoke;
 }
 
 .bottomRightButton:active {
@@ -365,10 +372,18 @@ label {
   align-items: center;
   justify-content: center;
 }
+.fc button:hover {
+  color: #643d7e !important;
+  background: whitesmoke !important;
+}
 .fc-left,
 .fc-right {
   float: none !important;
   display: inline-block !important;
+}
+
+.fc-daygrid {
+  width: 100%;
 }
 
 #eventCalendar {
@@ -378,13 +393,14 @@ label {
 
 #calendarModal {
   padding: none !important;
+  box-shadow: var(--plannBoxShadow1), var(--plannBoxShadow2) !important;
 }
 
 .fc-view-harness {
   width: 100%;
 }
 .fc-toolbar {
-  width: 80%;
+  /* width: 80%; */
   font-size: 0.8em;
   display: flex;
   flex-direction: column;
@@ -495,9 +511,4 @@ label {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.fc {
-  width: 80%;
-  height: 80%;
 }
