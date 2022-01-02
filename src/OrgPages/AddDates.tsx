@@ -17,6 +17,7 @@ interface AddDatesProps {
 interface FormData {
   eventName: string;
   description: string;
+  eventType: string;
 }
 function AddDates({ user, userId, isOrg }: AddDatesProps) {
   const url = "http://localhost:8080/orgEvents";
@@ -25,10 +26,13 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
   const [formData, setFormData] = useState<FormData>({
     eventName: "",
     description: "",
+    eventType: "none",
   });
 
   const onChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: React.ChangeEvent<
+      HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+    >
   ) => {
     const target = e.target as HTMLTextAreaElement | HTMLInputElement;
     let newFormData = { ...formData };
@@ -37,11 +41,12 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
   };
 
   const submitDate = () => {
-    const { eventName, description } = formData;
+    const { eventName, description, eventType } = formData;
     const payload = {
       date,
       eventName,
       description,
+      eventType,
       id: user?.id,
       zip: user?.zip,
     };
@@ -100,6 +105,18 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
           value={formData.description}
           onChange={onChange}
         />
+        <label htmlFor="description">Event Type</label>
+        <select
+          id="eventType"
+          name="eventType"
+          value={formData.eventType}
+          onChange={onChange}
+        >
+          <option value="none">None</option>
+          <option value="food">Food</option>
+          <option value="music">Music</option>
+          <option value="music">Comedy</option>
+        </select>
         <AddDateButton submitDate={submitDate} date={date} />
       </div>
       <div id="currentDatesContainer">

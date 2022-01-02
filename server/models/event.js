@@ -38,11 +38,13 @@ module.exports = {
   },
 
   add: async (body) => {
-    const { eventName, description, id, zip } = body;
-    let { date } = body;
+    let { eventName, description, id, zip, eventType, date } = body;
+    description = description.replace(/'/g, "''");
+    eventName = eventName.replace(/'/g, "''");
+
     date = new Date(date).getTime();
     return await pool.query(`
-     INSERT INTO events (name, date, description, org_id, zip) VALUES('${eventName}', ${date}, '${description}','${id}', ${zip})
+     INSERT INTO events (name, date, description, org_id, zip, type) VALUES('${eventName}', ${date}, '${description}','${id}', ${zip}, '${eventType}')
     `);
   },
 };

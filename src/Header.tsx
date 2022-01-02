@@ -28,7 +28,7 @@ function Header({ isOrg, isLoggedIn, setIsLoggedIn, user }: HeaderProps) {
       <NavButton path="/org/addDates" name="Add Dates" className="pages" />
       <NavButton
         path="/"
-        onClick={() => setIsLoggedIn(false)}
+        onClick={logOut}
         name="Log Out"
         className="pages"
       />{" "}

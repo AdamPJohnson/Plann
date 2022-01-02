@@ -14,14 +14,18 @@ const { signup, login, event, session, user, org } = require("./models");
 app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
     const hash = sha256((Math.random() * 1000).toString());
+
     res.cookie("eventSession", hash, {
       expires: new Date(Date.now() + 1800000), ///30 minute cookie
+
+      // expires: new Date(Date.now() + 30000), ///30 second cookie
     });
     session.insert(hash);
     res.status(200).send();
   } else {
     const hash = req.cookies.eventSession;
     let currentSession = await session.check(hash);
+
     if (currentSession.rows[0] && currentSession.rows[0].user_id) {
       const currentUser = await user.getOne(currentSession.rows[0].user_id);
       res.status(200).send(currentUser.rows[0]);
@@ -41,10 +45,11 @@ app.patch("/session", async (req, res) => {
 app.patch("/logout", async (req, res) => {
   const { id } = req.body;
   const hash = req.cookies.eventSession;
-
   session
-    .removeUser(hash, id)
-    .then((d) => console.log(d))
+    .logout(hash, id)
+    .then((d) => {
+      console.log(d);
+    })
     .catch((e) => console.log(e));
 });
 

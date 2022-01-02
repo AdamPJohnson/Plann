@@ -46,7 +46,8 @@ function UserNearbyEvents({ user }: UserNearbyEventsProps) {
       <select value={selectedType} onChange={handleSelect} id="eventTypeSelect">
         <option value="all">All</option>
         <option value="food">Food</option>
-        <option value="music"> Music</option>
+        <option value="music">Music</option>
+        <option value="music">Comedy</option>
       </select>
       <div id="nearbyEventList">{nearbyEventList}</div>
     </>

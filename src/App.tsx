@@ -11,21 +11,29 @@ import OrgHome from "./OrgPages/OrgHome";
 import UserProfile from "./UserPages/UserProfile";
 import UserDiscover from "./UserPages/UserDiscover";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import User from "./Interfaces/User";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
       .then((result) => {
+        console.log(result);
         if (result.data) {
           console.log(result.data);
           setUser(result.data);
           setIsLoggedIn(true);
+        } else {
+          navigate("/");
         }
       })
       .catch((e) => console.log(e));
@@ -90,19 +98,17 @@ function App() {
   );
 
   return (
-    <Router>
-      <div className="App">
-        <Header
-          isOrg={isOrg}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user!}
-        />
-        <div id="mainContainer">
-          <Routes>{main}</Routes>
-        </div>
+    <div className="App">
+      <Header
+        isOrg={isOrg}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        user={user!}
+      />
+      <div id="mainContainer">
+        <Routes>{main}</Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 

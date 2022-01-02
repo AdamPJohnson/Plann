@@ -119,9 +119,8 @@ function UserHome({ user }: UserHomeProps) {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            // weekends={this.state.weekendsVisible}
             initialEvents={formattedEvents} // alternatively, use the `events` setting to fetch from a feed
-            // select={this.handleDateSelect}
+            // select={handleDateClick}
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}
             // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
