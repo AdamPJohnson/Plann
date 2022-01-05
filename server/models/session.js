@@ -10,7 +10,7 @@ module.exports = {
   addUser: (hash, id) => {
     return pool.query(`UPDATE sessions SET user_id=${id} WHERE hash='${hash}'`);
   },
-  removeUser: (hash, id) => {
+  logout: (hash, id) => {
     return pool.query(`UPDATE sessions SET user_id=NULL WHERE hash='${hash}'
     `);
   },

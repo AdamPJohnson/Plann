@@ -12,6 +12,7 @@ interface SignUpFormProps {
   setIsOrg: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
+
 interface FormData {
   username: string;
   password: string;
@@ -45,6 +46,7 @@ function SignUpForm({
 
     setModalIsOpen(true);
   };
+
   const verifyForm = () => {
     if (formData.password.length < 8) {
       setErrorMessage("Password must be at least 8 characters long");

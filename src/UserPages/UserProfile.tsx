@@ -10,6 +10,7 @@ import NavButton from "../NavButton";
 interface UserProfileProps {
   user: User;
 }
+
 function UserProfile({ user }: UserProfileProps) {
   const [loading, setLoading] = useState(true);
   const [following, setFollowing] = useState([]);

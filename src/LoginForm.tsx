@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import axios from "axios";
 import User from "./Interfaces/User";
-
 interface LoginFormProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isOrg: boolean;

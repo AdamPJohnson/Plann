@@ -2,22 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "react-dates/initialize";
 import axios from "axios";
-import AddDates from "./OrgPages/AddDates";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
+
 import Header from "./Header";
-import UserHome from "./UserPages/UserHome";
-import OrgHome from "./OrgPages/OrgHome";
-import UserProfile from "./UserPages/UserProfile";
-import UserDiscover from "./UserPages/UserDiscover";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, useNavigate } from "react-router-dom";
 import User from "./Interfaces/User";
+import LoggedInRoutes from "./LoggedInRoutes";
+import LoginSignUp from "./LoginSignup";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
@@ -37,64 +28,17 @@ function App() {
         }
       })
       .catch((e) => console.log(e));
-  }, []);
-  const home = isOrg ? <OrgHome user={user!} /> : <UserHome user={user!} />;
-  const main = isLoggedIn ? (
-    <>
-      <Route path="/" element={home} />
+  }, [navigate]);
 
-      <Route path="/user">
-        <Route path="/user/home" element={<UserHome user={user!} />} />
-        <Route path="/user/profile" element={<UserProfile user={user!} />} />
-        <Route
-          path="/user/discover/*"
-          element={<UserDiscover user={user!} />}
-        />
-      </Route>
-      <Route path="/org">
-        <Route path="/org/home" element={<OrgHome user={user!} />} />
-        <Route
-          path="/org/addDates"
-          element={<AddDates userId={user!.id} isOrg={isOrg} user={user!} />}
-        />
-      </Route>
-    </>
+  const main = isLoggedIn ? (
+    <LoggedInRoutes user={user!} isOrg={isOrg} />
   ) : (
-    <>
-      <Route
-        path="/"
-        element={
-          <LoginForm
-            isOrg={isOrg}
-            setIsOrg={setIsOrg}
-            setIsLoggedIn={setIsLoggedIn}
-            setUser={setUser}
-          />
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <LoginForm
-            isOrg={isOrg}
-            setIsOrg={setIsOrg}
-            setIsLoggedIn={setIsLoggedIn}
-            setUser={setUser}
-          />
-        }
-      />
-      <Route
-        path="/signup"
-        element={
-          <SignUpForm
-            isOrg={isOrg}
-            setIsOrg={setIsOrg}
-            setIsLoggedIn={setIsLoggedIn}
-            setUser={setUser}
-          />
-        }
-      />
-    </>
+    <LoginSignUp
+      isOrg={isOrg}
+      setIsOrg={setIsOrg}
+      setIsLoggedIn={setIsLoggedIn}
+      setUser={setUser}
+    />
   );
 
   return (
@@ -105,9 +49,7 @@ function App() {
         setIsLoggedIn={setIsLoggedIn}
         user={user!}
       />
-      <div id="mainContainer">
-        <Routes>{main}</Routes>
-      </div>
+      <div id="mainContainer">{main}</div>
     </div>
   );
 }
