@@ -18,7 +18,7 @@ function ProtectedRoute({
   else authorized = false;
   console.log(forWhom, authorized, children);
   if (isLoggedIn && authorized) return <Routes>{children}</Routes>;
-  else return <div>UNAUTHORIZED</div>;
+  else return null;
 }
 
 export default ProtectedRoute;
