@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Header from "./Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import User from "./Interfaces/User";
 import LoggedInRoutes from "./LoggedInRoutes";
 import LoginSignUp from "./LoginSignup";
@@ -18,9 +18,7 @@ function App() {
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
       .then((result) => {
-        console.log(result);
         if (result.data) {
-          console.log(result.data);
           setUser(result.data);
           setIsLoggedIn(true);
         } else {
@@ -31,7 +29,7 @@ function App() {
   }, [navigate]);
 
   const main = isLoggedIn ? (
-    <LoggedInRoutes user={user!} isOrg={isOrg} />
+    <LoggedInRoutes user={user!} isOrg={isOrg} isLoggedIn={isLoggedIn} />
   ) : (
     <LoginSignUp
       isOrg={isOrg}
