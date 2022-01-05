@@ -7,8 +7,10 @@ import User from "../Interfaces/User";
 
 interface OrgHomeProps {
   user: User;
+  isOrg: boolean;
+  isLoggedIn: boolean;
 }
-function OrgHome({ user }: OrgHomeProps) {
+function OrgHome({ user, isOrg, isLoggedIn }: OrgHomeProps) {
   const [orgUpcomingEvents, setOrgUpcomingEvents] = useState([]);
 
   const getOrgUpcomingEvents = (id: Number) => {
@@ -45,13 +47,15 @@ function OrgHome({ user }: OrgHomeProps) {
       />
     </div>
   );
-  console.log(user);
-  return (
+
+  return isOrg && isLoggedIn ? (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
       <div id="upcomingEventsContainer">{eventList}</div>
     </div>
+  ) : (
+    <div>unauthorized</div>
   );
 }
 

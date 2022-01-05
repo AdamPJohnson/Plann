@@ -9,9 +9,11 @@ import NavButton from "../NavButton";
 
 interface UserProfileProps {
   user: User;
+  isOrg: boolean;
+  isLoggedIn: boolean;
 }
 
-function UserProfile({ user }: UserProfileProps) {
+function UserProfile({ user, isLoggedIn, isOrg }: UserProfileProps) {
   const [loading, setLoading] = useState(true);
   const [following, setFollowing] = useState([]);
 
@@ -51,7 +53,7 @@ function UserProfile({ user }: UserProfileProps) {
     </div>
   );
 
-  return (
+  return !isOrg && isLoggedIn ? (
     <div id="userPage">
       <div id="userProfile">
         <strong id="profileUserName">Username</strong>
@@ -68,6 +70,8 @@ function UserProfile({ user }: UserProfileProps) {
       </div>
       <BottomRightButton onClick={() => {}} icon={<BsGearFill />} />
     </div>
+  ) : (
+    <div>unauthorized</div>
   );
 }
 

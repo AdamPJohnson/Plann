@@ -8,8 +8,10 @@ import NearbyOrgs from "./NearbyOrgs";
 import Button from "react-bootstrap/Button";
 interface UserDiscoverProps {
   user: User;
+  isOrg: boolean;
+  isLoggedIn: boolean;
 }
-function UserDiscover({ user }: UserDiscoverProps) {
+function UserDiscover({ user, isLoggedIn, isOrg }: UserDiscoverProps) {
   const navigate = useNavigate();
   const onNavigate = (path: string) => {
     navigate(path);
@@ -21,7 +23,7 @@ function UserDiscover({ user }: UserDiscoverProps) {
     ? "activeButton"
     : "";
 
-  return (
+  return !isOrg && isLoggedIn ? (
     <div id="userPage">
       <div id="discoverSelectButtons">
         <Button
@@ -50,6 +52,8 @@ function UserDiscover({ user }: UserDiscoverProps) {
       </Routes>
       <BottomRightButton icon={<BsSearch />} onClick={() => {}} />
     </div>
+  ) : (
+    <div>unauthorized</div>
   );
 }
 

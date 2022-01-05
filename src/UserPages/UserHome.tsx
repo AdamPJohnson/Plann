@@ -17,8 +17,10 @@ import Overlay from "react-bootstrap/Overlay";
 import Tooltip from "react-bootstrap/Tooltip";
 interface UserHomeProps {
   user: User;
+  isLoggedIn: boolean;
+  isOrg: boolean;
 }
-function UserHome({ user }: UserHomeProps) {
+function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -27,6 +29,7 @@ function UserHome({ user }: UserHomeProps) {
     description: "",
   });
   const [overlayTarget, setOverlayTarget] = useState(null);
+
   const getUserUpcomingEvents = (id: number) => {
     axios
       .get(`http://localhost:8080/userEvents/${id}`)
@@ -97,9 +100,7 @@ function UserHome({ user }: UserHomeProps) {
     const eventDetails: Event = userUpcomingEvents.find(
       (event: Event) => event.name === e.event._def.title
     )!;
-
     setOverlayTarget(e.el);
-
     setOverlayText({
       title: eventDetails.name,
       description: eventDetails.description,
@@ -111,7 +112,7 @@ function UserHome({ user }: UserHomeProps) {
     setShowOverlay(false);
   };
 
-  return (
+  return !isOrg && isLoggedIn ? (
     <div id="userPage">
       <h3 id="welcome">{`Welcome back, ${user!.username}!`}</h3>
       <h6 id="userUpcomingEventsTitle">Your upcoming events:</h6>
@@ -166,6 +167,8 @@ function UserHome({ user }: UserHomeProps) {
         </Overlay>
       </Modal>
     </div>
+  ) : (
+    <div>unauthorized</div>
   );
 }
 

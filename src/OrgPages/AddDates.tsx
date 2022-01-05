@@ -12,6 +12,7 @@ interface AddDatesProps {
   user: User;
   userId: number;
   isOrg: boolean;
+  isLoggedIn: boolean;
 }
 
 interface FormData {
@@ -19,7 +20,7 @@ interface FormData {
   description: string;
   eventType: string;
 }
-function AddDates({ user, userId, isOrg }: AddDatesProps) {
+function AddDates({ user, userId, isOrg, isLoggedIn }: AddDatesProps) {
   const url = "http://localhost:8080/orgEvents";
 
   const [date, setDate] = useState(new Date());
@@ -82,7 +83,7 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
       />
     );
   });
-  return (
+  return isOrg && isLoggedIn ? (
     <div id="datePickerPage">
       <div id="datePicker">
         <h2>Pick a date to add!</h2>
@@ -124,6 +125,8 @@ function AddDates({ user, userId, isOrg }: AddDatesProps) {
         <div id="currentDatesList">{datesList}</div>
       </div>
     </div>
+  ) : (
+    <div>unauthorized</div>
   );
 }
 
