@@ -14,6 +14,7 @@ function App() {
   const [isOrg, setIsOrg] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/session", { withCredentials: true })
@@ -25,7 +26,9 @@ function App() {
           navigate("/");
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        throw new Error(e.message);
+      });
   }, [navigate]);
 
   const main = isLoggedIn ? (

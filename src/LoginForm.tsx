@@ -23,18 +23,19 @@ function LoginForm({
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const userOrg = isOrg ? "org" : "user";
-
     axios
       .post(`http://localhost:8080/login${userOrg}`, { ...formData })
       .then((data) => {
-        console.log("here!!!");
-        axios.patch(
-          `http://localhost:8080/session/`,
-          { id: data.data.id },
-          {
-            withCredentials: true,
-          }
-        );
+        axios
+          .patch(
+            `http://localhost:8080/session/`,
+            { id: data.data.id },
+            {
+              withCredentials: true,
+            }
+          )
+          .catch((e) => console.log(e));
+
         console.log({ data });
         setUser(data.data);
         setIsLoggedIn(true);

@@ -9,7 +9,6 @@ const sha256 = require("js-sha256");
 var zipcodes = require("zipcodes");
 
 const { signup, login, event, session, user, org } = require("./models");
-/////try/catch here?
 
 app.get("/session", async (req, res) => {
   if (!req.cookies.eventSession) {
@@ -17,7 +16,6 @@ app.get("/session", async (req, res) => {
 
     res.cookie("eventSession", hash, {
       expires: new Date(Date.now() + 1800000), ///30 minute cookie
-
       // expires: new Date(Date.now() + 30000), ///30 second cookie
     });
     session.insert(hash);
@@ -28,6 +26,7 @@ app.get("/session", async (req, res) => {
 
     if (currentSession.rows[0] && currentSession.rows[0].user_id) {
       const currentUser = await user.getOne(currentSession.rows[0].user_id);
+
       res.status(200).send(currentUser.rows[0]);
     } else {
       res.status(200).send(false);
@@ -39,18 +38,18 @@ app.patch("/session", async (req, res) => {
   const hash = req.cookies.eventSession;
   session
     .addUser(hash, id)
-    .then((d) => console.log(d))
-    .catch((e) => console.log(e));
+    .then(() => res.status(200).send())
+    .catch((e) => res.status(400).send(e.message));
 });
+
 app.patch("/logout", async (req, res) => {
   const { id } = req.body;
   const hash = req.cookies.eventSession;
   session
     .logout(hash, id)
-    .then((d) => {
-      console.log(d);
-    })
-    .catch((e) => console.log(e));
+    .then(() => res.status(200).send())
+
+    .catch((e) => res.status(400).send(e.message));
 });
 
 app.post("/orgEvents", (req, res) => {
@@ -59,7 +58,7 @@ app.post("/orgEvents", (req, res) => {
     .then((d) => {
       res.status(201).send(req.body);
     })
-    .catch((e) => console.log(e));
+    .catch((e) => res.status(400).send(e.message));
 });
 
 app.post("/loginUser", (req, res) => {
@@ -68,6 +67,7 @@ app.post("/loginUser", (req, res) => {
   login
     .loginUser({ username })
     .then((data) => {
+      console.log(data);
       if (data.rows[0]) {
         if (data.rows[0].password === hashedPassword) {
           res.status(200).send(data.rows[0]);
@@ -78,7 +78,7 @@ app.post("/loginUser", (req, res) => {
         res.status(404).send();
       }
     })
-    .catch((e) => console.log(e));
+    .catch((e) => res.status(400).send(e.message));
 });
 
 app.post("/loginOrg", (req, res) => {
