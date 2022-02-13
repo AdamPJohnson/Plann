@@ -6,6 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import UserNearbyEvents from "./UserNearbyEvents";
 import NearbyOrgs from "./NearbyOrgs";
 import Button from "react-bootstrap/Button";
+
 interface UserDiscoverProps {
   user: User;
   isOrg: boolean;

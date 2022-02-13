@@ -1,7 +1,7 @@
 import React from "react";
 
 interface BottomRightButtonProps {
-  icon: any;
+  icon: JSX.Element;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 

@@ -20,6 +20,13 @@ interface UserHomeProps {
   isLoggedIn: boolean;
   isOrg: boolean;
 }
+interface EventInfo {
+  timeText: string;
+  event: {
+    title: string;
+  };
+}
+
 function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
   const [userUpcomingEvents, setUserUpcomingEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -54,8 +61,7 @@ function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
   });
 
   const eventList = userUpcomingEvents.length ? (
-    userUpcomingEvents.map((event: any) => {
-      console.log(event);
+    userUpcomingEvents.map((event: Event) => {
       return (
         <EventListItem
           event={event}
@@ -89,7 +95,7 @@ function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
       transform: "translateX(-50%)",
     },
   };
-  const renderEventContent = (eventInfo: any) => {
+  const renderEventContent = (eventInfo: EventInfo) => {
     return (
       <>
         <b>{eventInfo.timeText}</b> <i>{eventInfo.event.title}</i>
@@ -97,6 +103,8 @@ function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
     );
   };
   const handleEventClick = (e: any) => {
+    /// type not available for FullCalendar event click
+    console.log(e);
     const eventDetails: Event = userUpcomingEvents.find(
       (event: Event) => event.name === e.event._def.title
     )!;
@@ -145,11 +153,6 @@ function UserHome({ user, isOrg, isLoggedIn }: UserHomeProps) {
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}
             // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-          eventAdd={function(){}}
-          eventChange={function(){}}
-          eventRemove={function(){}}
-          */
           />
         </div>
         <Overlay

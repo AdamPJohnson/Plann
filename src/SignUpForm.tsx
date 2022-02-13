@@ -13,14 +13,6 @@ interface SignUpFormProps {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
-interface FormData {
-  username: string;
-  password: string;
-  orgName: string;
-  email: string;
-  zip: string;
-  description: string;
-}
 ///////define modal app elements
 function SignUpForm({
   setIsLoggedIn,
@@ -28,7 +20,7 @@ function SignUpForm({
   setIsOrg,
   setUser,
 }: SignUpFormProps) {
-  const [formData, onChange] = useForm<FormData>({
+  const [formData, onChange] = useForm({
     username: "",
     password: "",
     orgName: "",

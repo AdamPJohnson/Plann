@@ -36,7 +36,7 @@ function LoginForm({
           )
           .catch((e) => console.log(e));
 
-        console.log({ data });
+
         setUser(data.data);
         setIsLoggedIn(true);
         navigate(`../${userOrg}/home`);

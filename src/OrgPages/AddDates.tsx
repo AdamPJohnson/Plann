@@ -37,7 +37,7 @@ function AddDates({ user, userId, isOrg, isLoggedIn }: AddDatesProps) {
   ) => {
     const target = e.target as HTMLTextAreaElement | HTMLInputElement;
     let newFormData = { ...formData };
-    (newFormData as any)[target.name] = target.value;
+    newFormData[target.name as keyof FormData] = target.value;
     setFormData(newFormData);
   };
 
