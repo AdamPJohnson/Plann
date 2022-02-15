@@ -3,8 +3,8 @@ import React, { useState } from "react";
 type formElement = HTMLInputElement | HTMLTextAreaElement;
 
 const useForm = (
-  inputs: Record<string, string>
-): [Record<string, string>, React.ChangeEventHandler<formElement>] => {
+  inputs: Record<string, string | number>
+): [Record<string, string | number>, React.ChangeEventHandler<formElement>] => {
   const [formData, setFormData] = useState(inputs);
   const onChange = (e: React.ChangeEvent<formElement>) => {
     const target = e.target as formElement;
